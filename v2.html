@@ -2345,25 +2345,27 @@
         if (!fsStream || fsMode !== 'scan') return;
 
         if (video.readyState === video.HAVE_ENOUGH_DATA && !isDetecting) {
+          canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
           isDetecting = true;
           let decoded = null;
 
-          // 1. Try Native BarcodeDetector (fastest, uses video directly)
+          // 1. Try Native BarcodeDetector
           if (bdReader) {
             try {
-              const barcodes = await bdReader.detect(video);
+              const barcodes = await bdReader.detect(canvas);
               if (barcodes.length > 0) decoded = barcodes[0].rawValue;
             } catch (err) { /* ignore */ }
           }
 
-          // 2. Fallback to ZXing if native failed or isn't available
-          if (!decoded) {
-            canvas.width = video.videoWidth; canvas.height = video.videoHeight;
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          // 2. Fallback to ZXing
+          if (!decoded && window.zxingReader) {
             try {
-              const result = window.zxingReader.decodeFromCanvas(canvas);
+              // Try decoding directly from video for ZXing
+              const result = await window.zxingReader.decodeFromVideoElement(video);
               if (result) decoded = result.getText();
-            } catch (err) { /* ignore NotFoundException */ }
+            } catch (err) { /* ignore */ }
           }
 
           if (decoded) {
@@ -2680,7 +2682,7 @@
       else { urduEl.textContent = ''; urduEl.style.display = 'none'; }
 
       const barcodeSvg = document.getElementById('rcBarcode');
-      if (window.JsBarcode) { JsBarcode(barcodeSvg, String(record.token), { format: "CODE128", width: 1.5, height: 40, displayValue: false, margin: 0 }); }
+      if (window.JsBarcode) { JsBarcode(barcodeSvg, String(record.token).padStart(4, '0'), { format: "CODE128", width: 2, height: 45, displayValue: false, margin: 0 }); }
     }
 
     function hidePrintContainer() { document.getElementById('printContainer').style.display = 'none'; }
