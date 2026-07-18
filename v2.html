@@ -32,7 +32,7 @@
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.11/plugin/utc.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.11/plugin/timezone.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+  <!-- jsQR removed as we are now using native BarcodeDetector for barcodes -->
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
   <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
   <!-- Tesseract.js (OCR) and TensorFlow/COCO-SSD (smart vehicle detection) are
@@ -1511,7 +1511,7 @@
             <button class="qa-btn ripple" data-goto="new-entry"><i class="bi bi-plus-circle"></i>
               <div>New Entry</div>
             </button>
-            <button class="qa-btn ripple" data-goto="exit"><i class="bi bi-qr-code-scan"></i>
+            <button class="qa-btn ripple" data-goto="exit"><i class="bi bi-upc-scan"></i>
               <div>Scan Exit</div>
             </button>
             <button class="qa-btn ripple" id="qaManualExit"><i class="bi bi-search"></i>
@@ -1589,15 +1589,15 @@
         <!-- ===================== SCREEN: EXIT ===================== -->
         <section class="screen" id="screen-exit">
           <div class="chip-row mb-3">
-            <button class="filter-chip active ripple" data-exitmode="qr">Scan QR</button>
+            <button class="filter-chip active ripple" data-exitmode="scan">Scan Barcode</button>
             <button class="filter-chip ripple" data-exitmode="manual">Manual Exit</button>
           </div>
 
           <div id="exitModeQr">
             <button class="btn btn-brand btn-block-tap ripple" id="btnStartScan" type="button"><i
-                class="bi bi-camera-video me-1"></i> Open Camera Scanner</button>
-            <div class="empty-state"><i class="bi bi-qr-code-scan"></i>Point the camera at the token's QR code to fetch
-              the vehicle instantly.</div>
+                class="bi bi-upc-scan me-1"></i> Open Barcode Scanner</button>
+            <div class="empty-state"><i class="bi bi-upc-scan"></i>Point the camera at the token's barcode to fetch
+              details.</div>
           </div>
 
           <div id="exitModeManual" style="display:none;">
@@ -2268,10 +2268,10 @@
   </script>
   <script>
     /* ============================================================
-       5. FULLSCREEN CAMERA / QR SCANNER (shared overlay)
+       5. FULLSCREEN CAMERA / BARCODE SCANNER (shared overlay)
     ============================================================ */
     let fsStream = null;
-    let fsMode = null; // 'capture' | 'qr'
+    let fsMode = null; // 'capture' | 'scan'
     let fsLoopId = null;
     let cocoModel = null;
     let cocoModelLoading = false;
@@ -2298,11 +2298,11 @@
       const hint = document.getElementById('fsHint');
       const title = document.getElementById('fsCameraTitle');
 
-      guideBox.classList.toggle('qr', mode === 'qr');
-      scanLine.style.display = mode === 'qr' ? 'block' : 'none';
+      guideBox.classList.toggle('scan', mode === 'scan');
+      scanLine.style.display = mode === 'scan' ? 'block' : 'none';
       footer.style.display = mode === 'capture' ? 'flex' : 'none';
-      title.textContent = mode === 'capture' ? 'Capture Vehicle' : 'Scan Token QR Code';
-      hint.textContent = mode === 'capture' ? 'Center the vehicle & number plate in frame, then tap the shutter.' : 'Point the camera at the token QR code — it scans automatically.';
+      title.textContent = mode === 'capture' ? 'Capture Vehicle' : 'Scan Token Barcode';
+      hint.textContent = mode === 'capture' ? 'Center the vehicle & number plate in frame, then tap the shutter.' : 'Point the camera at the token barcode — it scans automatically.';
 
       overlay.classList.add('active');
       try {
@@ -2310,7 +2310,7 @@
         const video = document.getElementById('fsVideo');
         video.srcObject = fsStream;
         await video.play();
-        if (mode === 'qr') startQrLoop();
+        if (mode === 'scan') startScannerLoop();
       } catch (err) {
         toastError('Camera access denied or unavailable.');
         closeFsCamera();
@@ -2326,18 +2326,42 @@
     }
     document.getElementById('btnCloseFsCamera').addEventListener('click', closeFsCamera);
 
-    function startQrLoop() {
+    let bdReader = null;
+    if ('BarcodeDetector' in window) {
+      bdReader = new BarcodeDetector({ formats: ['code_128', 'qr_code'] });
+    }
+
+    function startScannerLoop() {
       const video = document.getElementById('fsVideo');
       const canvas = document.getElementById('fsCanvas');
-      const ctx = canvas.getContext('2d');
-      function tick() {
-        if (!fsStream || fsMode !== 'qr') return;
-        if (video.readyState === video.HAVE_ENOUGH_DATA) {
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      let isDetecting = false;
+
+      async function tick() {
+        if (!fsStream || fsMode !== 'scan') return;
+        
+        if (!bdReader) {
+          toastError('Barcode scanning is not supported on this browser. Please use manual entry.');
+          closeFsCamera();
+          return;
+        }
+
+        if (video.readyState === video.HAVE_ENOUGH_DATA && !isDetecting) {
           canvas.width = video.videoWidth; canvas.height = video.videoHeight;
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-          const code = jsQR(imgData.data, imgData.width, imgData.height);
-          if (code) { handleQrResult(code.data); closeFsCamera(); return; }
+          
+          isDetecting = true;
+          try {
+            const barcodes = await bdReader.detect(canvas);
+            if (barcodes.length > 0) {
+              handleBarcodeResult(barcodes[0].rawValue);
+              closeFsCamera();
+              return;
+            }
+          } catch (err) {
+            console.error('Barcode detection error', err);
+          }
+          isDetecting = false;
         }
         fsLoopId = requestAnimationFrame(tick);
       }
@@ -2637,7 +2661,7 @@
         document.getElementById('rcAmount').textContent = 'Rs.' + (record.charge || 0).toLocaleString();
         document.getElementById('rcAmount').style.display = 'block';
       } else {
-        document.getElementById('rcLineDuration').style.display = 'none';
+        toggleLine('rcLineDuration', 'rcDuration', null);
         document.getElementById('rcAmount').style.display = 'none';
       }
 
@@ -2678,9 +2702,9 @@
   </script>
   <script>
     /* ============================================================
-       8. EXIT MODULE — fullscreen QR scan + combined manual search
+       8. EXIT MODULE — fullscreen barcode scan + combined manual search
     ============================================================ */
-    let exitMode = 'qr';
+    let exitMode = 'scan';
 
     async function prepareExitScreen() {
       document.getElementById('exitResultWrap').innerHTML = '';
@@ -2704,17 +2728,16 @@
       btn.classList.add('active');
       exitMode = btn.dataset.exitmode;
       document.getElementById('exitResultWrap').innerHTML = '';
-      document.getElementById('exitModeQr').style.display = exitMode === 'qr' ? 'block' : 'none';
+      document.getElementById('exitModeQr').style.display = exitMode === 'scan' ? 'block' : 'none';
       document.getElementById('exitModeManual').style.display = exitMode === 'manual' ? 'block' : 'none';
       if (exitMode === 'manual') prepareExitScreen();
     }));
 
-    document.getElementById('btnStartScan').addEventListener('click', () => openFsCamera('qr'));
+    document.getElementById('btnStartScan').addEventListener('click', () => openFsCamera('scan'));
 
-    function handleQrResult(dataStr) {
-      let token = null;
-      try { const parsed = JSON.parse(dataStr); token = parsed.token; } catch (e) { token = parseInt(dataStr, 10); }
-      if (token == null || isNaN(token)) { toastError('Unrecognized QR code.'); return; }
+    function handleBarcodeResult(dataStr) {
+      const token = parseInt(dataStr, 10);
+      if (isNaN(token)) { toastError('Unrecognized barcode.'); return; }
       goto('exit');
       lookupAndShowExit({ token });
     }
