@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>Parking Stand — Token Management</title>
+<meta name="theme-color" content="#161A22">
+
+<!-- ===================== PWA / "ADD TO HOME SCREEN" SUPPORT ===================== -->
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Parking%20Stand%22%2C%22short_name%22%3A%22ParkingStand%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23F3F5F8%22%2C%22theme_color%22%3A%22%23161A22%22%2C%22orientation%22%3A%22portrait%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAH2klEQVR4nO3dX2jVZRzH8e/zO2ebrrWZf7Y5ck2TaTmpWQiV/9IQCgmELirDm7Q/XiREkRddSVkQFCJoEnojRFDgRaUgiST9QUkqGmWxUhFqNpBpNtOdc35d/OpwcJvuPN/nz/d5zud1W9Pfnu97399v7hxVbR1zCEBX4vsCIGwICFgQELAgIGBBQMCCgIAFAQELAgIWBAQsCAhYEBCwICBgQUDAgoCAJe/7AqQY2Fmq9kPaN%2BHLj1QNvh5Io5WJq7WqaiUgq9GMpxZiijkgL9GMJ9aYIgxIVDejRVZSPAEJ72a0OEqKIaDg0qkUekYBBxR0N6MFWlKQAUWWTqXgMgosoIjTqRRQRsFcKNVMPRTUZxrGBgroQM2Sv4qkB1Sz6VSSnJHcKyPU8z/J5yB0A0k%2BMo8EriJxF0SoZ3wCT0ZcQALPSBRp5yPoFibtaIQTcjsTcRGEeqon5MREBCTkLIIj4dz8ByThFMLl/fQ8B%2BT984%2BA3zP09hCNdIzz8ljtZwOhHhu8nKqHgFCPPe7P1nVAqMc2xyfs/7swCJrTgLB%2B3HB5zu4CQj0uOTttRwGhHvfcnLmLgFCPLw5O3npAqMcv2%2BeP78KAxW5AWD8SWJ2CxYBQjxz2ZmErINQjjaWJ4BkIWKwEhPUjk425mA8I9UhmfDq4hQGL4YCwfuQzOyNsIGAxGRDWTygMTspYQKgnLKbmhVsYsJgJCOsnREamFtu/1tN3Nl21tWDpF6/LUUMd1eepebJqbaHWZnXrNJrXobpnqp5ONanO0m8rmoGAamf9jBRppEhEdP5SenqQiNLyf6rLU2%2BXemCeWnNP0jNL%2BbrCag3sLDHfjhjbBvJlpEDH%2B9Pj/ek7n5Zub1PrlibrlyU3T/Z9WfbhIdq8X8%2BlWz8q9r4ysm1/8e8rvq/GMm5AtXP/qtZfl2n7gdL9rxY%2BPiH6iJgTxAaya2Ao3fBu8aV9xSsjvi/FDlZAWD8TtO9o6bG3Cxcv%2B76OcXDmiA3kyPH%2BdO1bhQvDvq/DNATkTt/ZdOPuQiGura0fEO5fGj7/MX1jf9H3VYxBe5rYQK7tOlT67nR64/8vEAjItWKJtrwvcQnp0QwI9y%2BOb0%2Blh/vELSG9meJHGUREXTPUsW3XO4rhKzQ0nJ4bohOn0q9%2BTg99XxrhLZFdh4qremI4/Bg%2BBwcaG6ixQXXcQr2z1YaVNDCU7DhY2nOklOrukS9PpucuUFuL0av0Ac9AOtqnqNefyH2wOd80SfNXKKX0iewfcUyQTkB4AMqsWKD2PJfP634Nfv1LDI9B2EAsKxaojQ9pnuGx/hi%2BDhEQ1wsP5xobdD7wzws0FP5PNhAQ19QmWjJf8xjPDIq7i1Wr6s8cD0CjLbtD8zWsv58XF1C188UGMqBzuuYHDl81eh0%2BICADpjVpbqDh8F/wioAMKOneiFQwb98YFwIy4PwlzYIm15u9EA8QkAFnBjU/8Cat7/9FQUAGHP1J8zvTjqnB38OqCwjfw482eJG%2BOKl5C7ttusSAqpoyNhDX9gPFf7TestM%2BRbU0mr4a5xAQy2c/pHuPaG7lxXMlrp9qISB9h/vSZ3YXirp39fu6YwgILyjT8cdQuuNgaS/jBWW5hNYsiuGrFwFNyOWr/72k9ZvfzLykdcl81Rr%2ByxEJAWVOD6ZtG52%2Bef351TmXv509MWzR4PTOVg8uiOEBiBCQe7mE3nwykvVDCMi9TauTu7siWT%2BEgBxbfqfasjae9UMIyKWeWeq9Z/XfxSFTXJ%2BNYIvnqv0v5yP42cU1EJALTy1NPnwx3xzjX9qKPweyq62FXns89%2Bi90X6hIiBbmibR0yuTzY/kInjV2HUgIPPmtKp1S5P1y5Mo71nXqC6g9k0JXlM2proc3dWllsxXaxYlCzvD/mOeqv7xA2ygKuQTqq%2Bj%2Bjy1NKoZzdTarGZNp%2B6ZqnumWtipIniFvAYERDSBv2AKxhPtdwfgBgICFgQELAgIWKoOiPkP3IFw1c4XNQALAgIWBAQsOgHhMShWGpNFCsCCgIAFAQGLZkB4DIqP3kzRAbAgIGDRDwh3sZhoTxMRAAsCAhZWQLiLxYEzRxQALNyAsIRCx5wgxg8sCAhYVFvHHP6vgrerBor/BIINBCxmAsKjdIiMTA2DBxZjAWEJhcXUvExOHQ2FwuCkMHJgMRwQlpB8ZmeEeQOL%2BYCwhCQzPh0rw0ZDMtmYCyYNLLYCwhKSxtJELI4ZDclhbxZ2Z4yGJLA6BQwYWKwHhCXkl%2B3zdzFdNOSLg5N3NFo05J6bM3c3VzTkkrPTdjpUNOSGy3PGRIHFdUBYQrY5PmEP40RD9rg/Wz%2BzREM2eDlVM28s1IZ3JBrh8QvS8ybAKuLze4b%2B54eGOLyfnojheT%2BFQEk4N/9XkJFwFmERcmKeH6JHw2P1DQlJJyPoUjKiTkcgaecj62oy0s5IDoEnI%2B4WVgm3szKB6WSEXlZG7Kk5JvkcRG%2BgsppdRZLTyYQRUKamMpKfTiaMq8yEcqZ8AX2mIW2gsohXUUDpZIIMKBNZRsGlkwk4oLKgSwq0m7IYAsoEl1Ho6WTiCahMeElxdFMWYUBlokqKrJuymAOq5CWmWKOpVCsBVbIaUy1EU6kWAxqTRlW11sqYEBCw4GsIWBAQsCAgYEFAwIKAgAUBAQsCAhYEBCwICFgQELAgIGBBQMCCgIDlXy1PHayVRYSWAAAAAElFTkSuQmCC%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image/png%22%7D%2C%7B%22src%22%3A%22data%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAAAXA0lEQVR4nO3de7BdVX3A8bXPuUnMA0yCmAdgIQJqGFqCIIgIWrUK6owPlIp1lNraFrXVautI1U61pcOItTiVqe1oqw4KTK1W0KGiTkXEOlZ8FELFMlQTEBQwgASS3HtO/0gmhOTm3vPY%2B%2Bz1%2BHz%2BRZl19lnr9z17n8u91aq16wIA5em0vQAA2iEAAIUSAIBCCQBAoQQAoFACAFAoAQAolAAAFEoAAAolAACFEgCAQgkAQKEEAKBQAgBQKAEAKJQAABRKAAAKJQAAhRIAgEIJAEChBACgUAIAUCgBACiUAAAUSgAACiUAAIUSAIBCCQBAoQQAoFACAFAoAQAolAAAFEoAAAolAACFEgCAQgkAQKEEAKBQAgBQKAEAKNRU2wuA%2Bt15Sa%2BJf%2B3q83xgIivVqrXr2l4DDKeh%2BT4%2BhSAtAkDUop31g1MFoiUARCSDcT8ISSASAkCbCpn4c9MD2iIATJSJPy89YGIEgMYZ%2BiMTAxolADTC0K%2BdGFA7AaBO5v4EKAF1EQDGZei3SAwYhwAwInM/KkrACASA4Zj7kVMCBicADMTcT44SMC8BYC7mfgaUgP0RAGZn9GdGBtiXAPAo5n72lIDdBIBdjP6iyABBADD3C6cEJROAchn97CYDZRKAEhn9zEoGSiMAZTH6mZcMlEMASmH0MxQZKIEA5M/oZ2QykDcByJnRTy1kIFcCkCejn9rJQH4EIDdGP42SgZwIQD6MfiZGBvIgADkw%2BmmFDKROANJm9NM6GUiXdy5hpj8xsA/T5Q4gSY4cEXIrkBwBSIzRT%2BRkICHeqpSY/sTPLk2IO4A0OFQkx61A/AQgdkY/SZOBmHlvomb6kzp7OGbuACLl2JAZtwIR8pbEyPQnP3Z1hNwBxMUhIXtuBeLhnYiI6U8J7PN4CEAsnArKYbdHwiOg9jkMFMvjoHa5%2Bi0z/SmZ/d8uAWiT3Q9OQYs8AmqHTQ978Tho8lzxFpj%2BsC/nYvIEYNLsctgfp2PCPAKaHJsbBuRx0GS4yhNi%2BsPgnJfJEIBJsJthWE7NBAhA4%2BxjGI2z0zQBaJYdDONwghrlS%2BCm2LhQI18LN8E1bYTpD/VyppogAPWzU6EJTlbtBKBm9ig0x/mqlwDUye6EpjllNRKA2tiXMBnOWl0EoB52JEySE1cLAaiBvQiT59yNTwDGZRdCW5y%2BMQnAWOw/aJczOA4BGJ2dBzFwEkcmACOy5yAezuNoBGAUdhvExqkcgQAMzT6DODmbwxKA4dhhEDMndCgCMAR7C%2BLnnA5OAAZlV0EqnNYBCcBA7CdIizM7CAGYn50EKXJy5yUA87CHIF3O79wEYC52D6TOKZ6DAOyXfQN5cJb3RwBmZ8dATpzoWQnALOwVyI9zvS8BACiUAOzNxwTIldO9FwF4FPsD8uaM70kAHmFnQAmc9N0EYBd7AsrhvO8kACHYDVAepz4IAECxBMAHASiUs196AOwAKFnhE6DoABT%2B3gOh7DlQdAAASlZuAErOPrCnYqdBoQEo9v0GZlXmTCgxAGW%2B08DcCpwMJQYAgFBgAAqMPDCg0uZDWQEo7d0FhlXUlCgoAEW9r8DIypkVBQUAgD2VEoBykg6Mr5CJUUQACnkvgRqVMDeKCAAA%2B8o/ACVkHGhC9tMj8wBk//4Bjcp7hmQeAAD2J%2BcA5J1uYDIyniQ5BwCAOWQbgIyjDUxYrvMkzwDk%2Bm4BbclyquQZAADmlWEAsgw10Lr8ZkuGAQBgELkFIL9EA/HIbMJkFYDM3hsgQjnNmawCAMDg8glATlkGYpbNtMknAAAMJZMAZBNkIAl5zJxMAgDAsHIIQB4pBtKSweTJIQAAjCD5AGQQYSBRqc%2Bf5AMAwGjSDkDq%2BQVSl/QUSjsAAIws4QAkHV4gG%2BnOoqm2F0Ay3v/5mYuuTHWjj2aqEzqdMNUNU53wmIVhycJq6WPCkoXhwMVhxbJqxdJw0AHV4w4Iq5dXa1eEtSuqFcvaXjEMI9UApJtcEjLdC6EXtk%2BHEML9D4UQ%2Bnv8w/6%2B//sli8IRj6/WPb5atyoctbo65rDqqDXVgu5kFkub7rykt/q89B6opBoAiNDWbeGmTf2bNj3ShgXdcNSaasMR1QnrqhOfWB25uqqqFhcIj5JkAHz8JxU7ZsLGzf2Nm/uXfj2EEJYvDc98cue0p1Snra8OP1gKspLiTUCSAYBEbXkwXPmd3pXfCSGEo1ZXZx5fnbmh82u/4raAdlSr1q5rew3D8fG/LQV%2BCTwZhx5UnXVy9YqTO0eu1oHkpXUTkNJaIUub7%2Bn/7Rd6z3j39BkXTF/xzd7O75xhAhILgI//ZOyG2/pv/tjMcX%2B644LPztz9QNurYSRpzajEAgDZu%2BeBcPEXe099x453XTZzxy9m%2BWFTqEtKAUgrrTCOh3eEf/xK76Tzp//iX2a2bG17NQwjoUmVUgCgNNunwyX/3jvpnTv%2B4cu9mWSmCskQAIjdlq3h3ZfP/MZfTt9wmydC1CmZACR0VwVNuHFT/4V/Pf2eK2b8mFD8UplXyQQA6PXDR67pPfd90zducitADdIIQCo5hQn44R39My6YvvTrDkXUkphaaQQA2NP26fDHn5h568c9DmIsAgCp%2BtR1vVd%2BcNoPiTKyBAKQxJ0UtOKbt/RffOH07ff6SiBG8c%2BuBAIAzOGWO/ovvnDmxz/XAIYWewDiTyi07vZ7%2By%2B5aOb/NCA%2BkU%2Bw2AMADOKOe/sv/8DMXfe1vQ6SIgCQic339F918fQDD7W9DtIRdQAiv3uC2Ny0qf/6v5/2W4OiEvMcizoAwLC%2BtrF/wWdn2l4FaRAAyM3fXd276oZ4P3USj3gDEPN9E0TubR%2Bf%2BekWPxQUi2inWbwBAEa2ZWv4w4/N9CWAOQkA5Onam/uXXhfpB08iEWkAor1jgoS87zMz9/6y7UUQQoh1pkUaAGB8Wx4M7/uMnwhivwQAcnbZN3q33OGrAGYXYwDivFeCFPX64a8%2B60BFIcLJFmMAgBpd/b3e93/sJoBZCADk78NXR/fZkxgIAOTvqht6P7nbTQB7m2p7AXuL8DEZcTr7lM6Hzu3W%2BC/s9cO2HWHbjvDwjv7P7w933Rd%2Bdl//1rv6N2/u33x7uOMXCQ/QmV74p//o/flZdV4uRnDnJb3V50X0sTu6AEBbOlVYvDAsXhhCqFYvD8eGEEK1%2B5/efm//axv7197c/9L3ew9ua2uNo7vi%2Bt75L%2B0ukAD2IAAwkENWVuecWp1zanhoe/eL3%2B198treN29J6Z7g7gfCNT/onbkhoo%2BftC6u3eD5D/FbvDC8/KTO5/5k6sp3TD37mGr%2B/0M0/vVbKRUrV1FNubgCAAl52pHVZW%2BZ%2Bvgbu2tXppGBr9zYe3hH24sgJgIAY3nBcZ3r3jv1khMTOEpbt4Wv3hjRx09al8CuhcgtXRQ%2B8obue1/Z7UR/J/Dl//YUiEdEFICoHo3BsH7veZ2Lz429AdduFID2xTPrIgoApO6VT%2B988HVR/6Dlpnv6t/1MA9hFAKBOv3lK5/efF/Wx%2Btb/CgC7RL1TIUXvOat74hPjfRL03dsEgF1iCUA8D8VgTN1OuOg13alYztbeBCAGkUy8WDcppOzJh1S/85xID9fG2/szUQwf2hfpHoXUvekF3UUL2l7EbHZMhx/7zaCEEAQAGnLwgeHsUyI9Xz/6qQAQggBAc159aqTn69Y7214BcYhig0byfQjU67jDq8MOivHHgZL%2B2wbZiGHuRREAyNUZG%2BIMQNsrIA4CAA162pFxBsAdACEIADQqzv8i7N5ftr0C4iAA0KDVy6sVy9pexD7ue9AdACHEEIAYvgmB5hwW35%2BLuf%2Bh0JeACLQ%2B/doPAOTtCY%2BLLgC9fti6ve1FEAEBgGZF%2BAgohLBjuu0VEAEBgGYtXtj2CmazY6btFRABAYBmLVnU9gpms2PalwAIADQs0q9bo/tigha0HIDWvwSHpm3d1vYKZrOgqwBRaHcGugOAZj0U5c/bLJhqewVEQACgWXc/0PYKZrMw6r9dz4QIADRr0z3RfQkw1Yn0q2kmTACgWZvi%2B/NbByxpewXEQQCgQT%2B5u3//Q20vYh%2BPXewbYEIQAGjUf90a3cf/EMJBB7S9AuLQZgD8DCjZ%2B88fxRiAtSvcAUSkxUnoDgCa0uuHq78X46ecNSvaXgFxEABoyrd%2B1L/rvrYXMZtD4/sN1bRCAKApn7g2xo//IYR1qwSAEAQAGrL5nv7nvx1pAI5e0/YKiIMAQCP%2B5gu96Sjn/6IF4bD4/kYNrRAAqN8Nt/U/dV2U4z%2BEYw6tOuY/IQQBgNptnw5v/%2BRMpL8FOoQNRxj/7CIAULN3XDpz06ZYx38IGw4XAHYRAKjTR67pRfvwZ6eTjxYAdhEAqM1Hv9p7zxVR/7Hdww%2BuDjtIANiltQD4PRDkpN8P7//8zPmfjnr6hxBOW2/6x6iteejPAsG4tmwNb/7YzJe%2Bn8BnmuceKwA8QgBgLP/27d6fXTbz8/vbXscAli4Kz1rvqS%2BPEAAY0Tf%2Bp3/RVTPX/zDeH/jZy/N%2BtbNoQduLICYCAMN5cFu46ju9T1zbi/N3/c/h5Sd5/sOjCAAMZNM9/Ws39r%2B2sf%2BlH/Qe2t72aoa36rHh14/1/IdHEQDYpd8P26bDwzvCw9v7dz8Q7rov3LWlf%2Btd/Zs39zduDj/dktjn/b2cfUpnyvzn0QSAVF1%2Bfe/y6xP4wZsYTHXCa083/tmbPQH5e/EJnUP991/sQwAgf298vpPOLGwLyNwLj%2B8c%2BwQf/5mFAEDOup3wzpc45szOzoCcveoZnaPW%2BPjP7AQAsrViWXjXy7ptr4J4CQBk690v665Y1vYiiJgAQJ5OX1%2Bdc6oDzlzsD8jQ8iXh4nO7lYf/zEkAIEMfeG13zXLjn3kIAOTmTS/ovOh4R5v52SWQldOeUp3/Uj/5w0AEAPKx/tDqo38w1XWsGYydApk49KDq03/UPXBx2%2BsgHQIAOVi7svrM27qrffHLMAQAknfIyupzb%2B8efrDpz3D8QRhI21Frqsvf0j1kpenP0AQAEvb0o6t/fuPU8iVtr4M0CQCk6pxTOxe%2BurvQIWZU9g6kZ%2BFUuOBV3dec5js8xiIAkJgnra0%2B/PquP/LF%2BFr7BLH6PB9eYDhVFd7w3M4175oy/TPT1jx0BwBpOOaw6v2/1X3qOqOf2ggAxO6xS8LbXtR9/XM6U26bqZUAQLwWToXffnbnrS/sLl/a9lLIkQBAjB6zILz6mZ03Pb%2Bz1n/hRWMEAOKycll4zWmd331O9%2BAD214KuRMAiMWGI6rXPavz0hM7ixa0vRTKIADQskNWVmedXL3i5M5RazztYaIEANpx5OrqjOOqM4/vbDi88tfbaYUAwOQsXxKe8eTO6eur09dXfnszrRMAaNBUJxy5pjr%2BiOqEddUJT6yOXuPDPhFpMwCrz%2BvceUmvxQVAvRYvDIcfXK1bVa17fDh6bbX%2B0OpJa6oFPmUxpxZ/L469CfvV7YROJ3SrsGAqLJoKSxZVSxeFJYvCgYvDimXVyqVh5bLqcQeGNcvDmhXV2hXVQQe0vWIYhgCQqrNP6Xzo3G7bq4CE%2Bd0iAIUSAIBCCQBAoQQAoFAtB8DfBQNK1u4MNH8BCiUAAIUSAIBCCQBAoQQAoFDtB8APAgFlan36Gb4AhRIAgEIJAEChBACgUFEEoPVvQgAmLIa51/4KAGiFAAAUSgAACiUAAIWKJQAxfB8CMBmRTLwoFgHA5AkAQKEEAKBQEQUgkodiAI2KZ9bFsg4AJkwAAAolAACFiisA8TwaA2hCVFMuoqUAMEkCAFCo6AIQ1f0RQI1im29xrQaAiREAgEIJAEChYgxAbI/JAMYX4WSLbkEATIYAABQq0gBEeK8EMLI4Z1qMawJgAgQAoFDxBiDOOyaAYUU7zSJdFgBNEwCAQkUdgGjvmwAGFPMci3dlADRKAAAKFXsAYr57Aphb5BMs6sUB0JwEAhB5QgFmFf/sin19ADREAAAKlUYA4r%2BTAthTElMrgSUC0IRkApBETgFCOvMqjVUCUDsBAChUSgFI5a4KKFlCkyqZhQJQr8QCkFBagQKlNaNSWisANUovAGkFFihHctMpseUCUJckA5BcZoHspTiXqlVr17W9hlHceUmv7SUAPCLFAKS34p1SvNZArhKdSEkuGoDxJRyARJMLZCbdWZTqugEYU9oBSDe8QB6SnkIJLx2AcSQfgKTzCyQt9fmT9uoBGFkOAUg9wkCKMpg8yb8AAEaTSQAySDGQkDxmTg6vAYAR5BOAPIIMxC%2BbaZPJywBgWFkFIJssA9HKac7k80p2yum9AWKT2YTJ6sUAMLgMA5BZooFI5Ddbcns9AAwozwDkF2qgXVlOlQxf0k5ZvltAK3KdJ3m%2BKgDmlXMAco02MEkZT5JsXxgAc8s8ABmnG5iAvGdIzq9tp7zfP6A52U%2BPzF8eAPtTRACyzzhQuxLmRv6vcKcS3kugLoVMjCJeJAD7KigAhSQdGFM5s6KU17lTOe8rMJqipkRBL3Wnot5dYCilzYeyXi0Au5UYgNIiDwyiwMlQ3AveqcB3GphDmTOhxNe8U5nvN7CvYqdBoS8bgKIDUGz2gd1KngPlvvKdSn7vgcInQNEvfqfCdwAUy9kv/fUDFEsAQvBBAMrj1AcB2M1ugHI47zu5Co%2BwJ6AETvpuLsSj2BmQN2d8T67F3uwPyJXTvReXA6BQAjALHxMgP871vlyR2dkrkBMnelYuyn7ZMZAHZ3l/XJe52DeQOqd4Di7NPOweSJfzOzdXZ372EKTIyZ2XCzQQOwnS4swOwjUalP0EqXBaB%2BQyDcGugvg5p4NzpYZjb0HMnNChuFhDs8MgTs7msFyvUdhnEBuncgQu2YjsNoiH8zgaV2109hzEwEkcmQs3FjsP2uUMjsO1G5f9B21x%2Bsbk8tXALoTJc%2B7G5wrWw16ESXLiauEi1saOhMlw1uriOtbJvoSmOWU1cilrZndCc5yverma9bNHoQlOVu1c0EbYqVAvZ6oJ1aq169peQ87uvKTX9hIgbUZ/c1zZZtm7MA4nqFEubuPsYBiNs9M013cS7GMYllMzAS7xhNjNMDjnZTJ8CTxpvhaGORj9k%2BRaT5r9DfvjdEyYy90Cuxz25VxMnkdAbfI4CILR3x7XvU32PTgFLXLpW2b3UzL7v10eAcXC4yCKYvTHwHsQC%2BeBctjtkfA2RMSpoAT2eTw8AoqRx0FkyeiPjfcjRs4J%2BbGrI%2BQOIGpuBciA0R8tb0zUnBxSZw/HzB1AGtwKkByjP34CkBIZIAlGfyq8TylxroifXZoQdwBJcitAhIz%2B5AhAwmSASBj9ifK2JcypIwb2YbrcAeTArQCtMPpTJwD5kAEmxujPgwDkRgZolNGfEwHIkwxQO6M/PwKQMxmgFkZ/rgQgfzLAyIz%2BvAlAKWSAoRj9JRCAssgA8zL6yyEAJZIBZmX0l0YAyiUD7Gb0l0kASicDhTP6SyYA7KIERTH3CQLAXmQge0Y/uwkAs1OCzJj77EsAmIsMZMDoZ38EgIEoQXLMfeYlAAxHCSJn7jM4AWBEShAVc58RCADjUoIWmfuMQwCokxhMgKFPXQSARihB7cx9aicANE4MRmbo0ygBYKLEYF6GPhMjALRJD4KJT3sEgIgU0gMTn0gIAFHLIAnGPdESANITbRXMetIiAGSooUKY72RGAAAK5RMNQKEEAKBQAgBQKAEAKJQAABRKAAAKJQAAhRIAgEIJAEChBACgUAIAUCgBACiUAAAUSgAACiUAAIUSAIBCCQBAoQQAoFACAFAoAQAolAAAFEoAAAolAACFEgCAQgkAQKEEAKBQAgBQKAEAKJQAABRKAAAKJQAAhRIAgEIJAEChBACgUAIAUCgBACiUAAAUSgAACvX/HWeA%2BU2LsskAAAAASUVORK5CYII%3D%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image/png%22%7D%5D%7D">
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Parking Stand">
+
+<!-- ===================== CDN LIBRARIES ===================== -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Noto+Nastaliq+Urdu:wght@500;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.11/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.11/plugin/utc.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.11/plugin/timezone.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+<script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+<!-- Tesseract.js (OCR) and TensorFlow/COCO-SSD (smart vehicle detection) are
+     large and only needed once a camera is actually opened, so they are
+     lazy-loaded on demand (see loadScriptOnce/ensureTesseract/ensureCocoModel)
+     instead of blocking the very first paint of the app. -->
+
+<style>
+/* ============================================================
+   DESIGN TOKENS — "Toll Stand" Material 3 mobile theme (single light theme)
+   Signature: perforated ticket-stub cards + boom-barrier FAB
+============================================================ */
+:root{
+  --asphalt-900:#12151B;
+  --asphalt-800:#161A22;
+  --asphalt-700:#1D2330;
+  --asphalt-600:#2A3242;
+  --amber-500:#FFB020;
+  --amber-400:#FFC24D;
+  --go-500:#2BB673;
+  --go-100:#E4F7EE;
+  --stop-500:#E5484D;
+  --stop-100:#FCE8E8;
+  --paper:#F3F5F8;
+  --surface:#FFFFFF;
+  --ink-900:#161A22;
+  --ink-600:#5B6472;
+  --ink-400:#8A93A2;
+  --border-soft:#E4E8EE;
+  --shadow-sm: 0 1px 2px rgba(18,21,27,.06), 0 2px 8px rgba(18,21,27,.05);
+  --shadow-md: 0 6px 20px rgba(18,21,27,.12);
+  --shadow-lg: 0 14px 36px rgba(18,21,27,.20);
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
+  --font-display:'Manrope', sans-serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+  --font-nastaliq:'Noto Nastaliq Urdu', serif;
+  --nav-h: 66px;
+  --topbar-h: 118px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-t: env(safe-area-inset-top, 0px);
+}
+
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{ height:100%; overflow:hidden; }
+/* Dynamic viewport height: on mobile, 100% / 100vh is measured against the
+   LARGEST possible viewport (toolbar hidden). When the address bar is
+   visible, that makes the page taller than what's actually visible, pushing
+   the bottom nav/FAB below the fold. 100dvh tracks the real visible area —
+   browsers that don't support it simply ignore the rule and keep 100% above. */
+body{ height:100vh; }
+body{ height:100dvh; }
+body{
+  margin:0; background:var(--asphalt-900); color:var(--ink-900); font-family:var(--font-body);
+}
+h1,h2,h3,h4,.font-display{ font-family:var(--font-display); }
+.font-nastaliq{ font-family:var(--font-nastaliq); direction:rtl; }
+button{ font-family:inherit; }
+::selection{ background:var(--amber-500); color:#161A22; }
+
+/* ---------- App shell: fixed frame, never lets nav/FAB drift ---------- */
+/* Starts hidden — JS reveals it only after a valid license is confirmed,
+   so an unlicensed app never flashes visible before the lock screen paints. */
+#appShell{
+  display:none; flex-direction:column; height:100%; max-width:560px; margin-inline:auto;
+  background:var(--paper); position:relative; overflow:hidden;
+}
+
+/* ---------- Top bar ---------- */
+.app-topbar{
+  flex:none; background:var(--asphalt-800); color:#fff; padding:calc(14px + var(--safe-t)) 18px 16px;
+  border-radius:0 0 22px 22px; box-shadow:var(--shadow-md); position:relative; z-index:20;
+}
+.app-topbar .row1{ display:flex; align-items:center; justify-content:space-between; }
+.brand{ display:flex; align-items:center; gap:10px; min-width:0; flex:1 1 auto; }
+.brand-mark{
+  width:38px; height:38px; border-radius:12px; flex:none;
+  background:linear-gradient(135deg, var(--amber-500), var(--amber-400));
+  display:flex; align-items:center; justify-content:center; color:#161A22; font-size:1.1rem; box-shadow:var(--shadow-sm);
+}
+.brand-name{ font-weight:800; font-size:1rem; letter-spacing:.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.brand-sub{ font-size:.66rem; text-transform:uppercase; letter-spacing:.09em; color:rgba(255,255,255,.5); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.topbar-icon-btn{
+  width:38px; height:38px; border-radius:50%; border:none; background:rgba(255,255,255,.08); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:1.05rem; position:relative;
+}
+.topbar-icon-btn:active{ background:rgba(255,255,255,.18); }
+.topbar-actions{ display:flex; gap:8px; }
+.screen-title-row{ display:flex; align-items:center; justify-content:space-between; margin-top:14px; }
+.screen-title{ font-weight:800; font-size:1.3rem; }
+.screen-caption{ font-size:.78rem; color:rgba(255,255,255,.55); margin-top:1px; }
+
+/* ---------- Scroll area (only this scrolls) ---------- */
+.shell-scroll{ flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch; position:relative; }
+.app-body{ padding:16px 16px 110px; }
+.screen{ display:none; animation: screenIn .28s ease; }
+.screen.active{ display:block; }
+@keyframes screenIn{ from{ opacity:0; transform:translateY(10px);} to{ opacity:1; transform:translateY(0);} }
+
+.section-label{
+  font-family:var(--font-display); font-weight:800; font-size:.82rem; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--ink-600); margin:22px 2px 10px; display:flex; align-items:center; justify-content:space-between;
+}
+.section-label .see-all{ font-size:.72rem; text-transform:none; letter-spacing:0; color:var(--amber-500); font-weight:700; }
+
+/* ---------- Cards ---------- */
+.card{ background:var(--surface); border-radius:var(--radius-md); box-shadow:var(--shadow-sm); border:1px solid var(--border-soft); }
+.stat-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.stat-card{ background:var(--surface); border-radius:var(--radius-md); padding:14px 16px; box-shadow:var(--shadow-sm); border:1px solid var(--border-soft); position:relative; overflow:hidden; }
+.stat-card .stat-icon{ width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:.95rem; margin-bottom:10px; }
+.stat-label{ font-size:.7rem; color:var(--ink-600); text-transform:uppercase; letter-spacing:.04em; font-weight:600; }
+.stat-value{ font-family:var(--font-display); font-weight:800; font-size:1.35rem; margin-top:2px; overflow-wrap:anywhere; }
+.stat-sub{ font-size:.68rem; color:var(--ink-400); margin-top:2px; }
+
+.capacity-card{ padding:18px; display:flex; align-items:center; gap:16px; }
+.ring-wrap{ position:relative; width:84px; height:84px; flex:none; }
+.ring-wrap svg{ transform:rotate(-90deg); }
+.ring-bg{ fill:none; stroke:var(--border-soft); stroke-width:9; }
+.ring-fg{ fill:none; stroke:var(--amber-500); stroke-width:9; stroke-linecap:round; transition:stroke-dashoffset .6s ease; }
+.ring-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.ring-center b{ font-family:var(--font-display); font-size:1.05rem; }
+.ring-center span{ font-size:.6rem; color:var(--ink-400); }
+
+.vtype-scroll{ display:flex; gap:10px; overflow-x:auto; padding-bottom:4px; scrollbar-width:none; }
+.vtype-scroll::-webkit-scrollbar{ display:none; }
+.vtype-pill{ flex:none; min-width:92px; background:var(--surface); border:1px solid var(--border-soft); border-radius:var(--radius-sm); padding:12px; text-align:center; box-shadow:var(--shadow-sm); }
+.vtype-pill i{ font-size:1.15rem; color:var(--amber-500); }
+.vtype-pill .vt-count{ font-family:var(--font-display); font-weight:800; font-size:1.05rem; margin-top:4px; }
+.vtype-pill .vt-name{ font-size:.66rem; color:var(--ink-600); text-transform:uppercase; letter-spacing:.03em; }
+
+.qa-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.qa-btn{ background:var(--surface); border:1px solid var(--border-soft); border-radius:var(--radius-sm); padding:14px 6px; text-align:center; box-shadow:var(--shadow-sm); }
+.qa-btn i{ font-size:1.2rem; color:var(--asphalt-700); }
+.qa-btn div{ font-size:.66rem; font-weight:700; margin-top:6px; color:var(--ink-600); }
+.qa-btn:active{ transform:scale(.96); }
+
+/* ---------- Perforated ticket-stub row (signature element) ---------- */
+.stub{ position:relative; background:var(--surface); border:1px solid var(--border-soft); border-radius:14px; padding:12px 14px; display:flex; align-items:center; gap:12px; box-shadow:var(--shadow-sm); margin-bottom:10px; }
+.stub::before, .stub::after{ content:''; position:absolute; top:50%; transform:translateY(-50%); width:14px; height:14px; border-radius:50%; background:var(--paper); border:1px solid var(--border-soft); }
+.stub::before{ left:-8px; } .stub::after{ right:-8px; }
+.stub .stub-divider{ position:absolute; left:66px; top:8px; bottom:8px; border-left:1.5px dashed var(--border-soft); }
+.stub-icon{ width:42px; height:42px; border-radius:12px; flex:none; display:flex; align-items:center; justify-content:center; font-size:1.1rem; background:var(--go-100); color:var(--go-500); }
+.stub-icon.exited{ background:var(--border-soft); color:var(--ink-400); }
+.stub-body{ flex:1; min-width:0; padding-left:8px; }
+.stub-title{ font-weight:700; font-size:.88rem; display:flex; align-items:center; gap:6px; }
+.stub-meta{ font-size:.72rem; color:var(--ink-600); margin-top:2px; }
+.stub-token{ font-family:var(--font-mono); font-weight:700; font-size:.78rem; color:var(--ink-400); }
+.stub-right{ text-align:right; flex:none; }
+.stub-amt{ font-family:var(--font-display); font-weight:800; font-size:.95rem; }
+.status-chip{ font-size:.6rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; padding:2px 8px; border-radius:20px; margin-top:3px; display:inline-block; }
+.status-chip.active{ background:var(--go-100); color:var(--go-500); }
+.status-chip.exited{ background:var(--border-soft); color:var(--ink-400); }
+
+/* ---------- Bottom navigation + FAB — pinned inside the shell, not the viewport ---------- */
+.bottom-nav{
+  position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:560px;
+  flex:none; height:calc(var(--nav-h) + var(--safe-b)); padding-bottom:var(--safe-b);
+  background:var(--surface); border-top:1px solid var(--border-soft);
+  display:flex; align-items:center; justify-content:space-around; z-index:50;
+  box-shadow:0 -4px 18px rgba(18,21,27,.08);
+}
+.nav-item{ background:none; border:none; display:flex; flex-direction:column; align-items:center; gap:3px; color:var(--ink-400); flex:1; padding:6px 0; position:relative; }
+.nav-item i{ font-size:1.25rem; }
+.nav-item span{ font-size:.62rem; font-weight:700; letter-spacing:.01em; }
+.nav-item.active{ color:var(--asphalt-800); }
+.nav-item .nav-pill{ position:absolute; top:-2px; width:26px; height:3px; border-radius:3px; background:transparent; }
+.nav-item.active .nav-pill{ background:var(--amber-500); }
+.nav-fab-slot{ width:60px; flex:none; }
+
+.fab{
+  position:fixed; left:50%; transform:translateX(-50%); bottom:calc(var(--nav-h) + var(--safe-b) - 26px); z-index:55;
+  width:64px; height:64px; border-radius:50%; border:none; cursor:pointer;
+  background:var(--amber-500);
+  box-shadow:var(--shadow-lg); display:flex; align-items:center; justify-content:center;
+}
+.fab i{ position:relative; z-index:2; color:var(--asphalt-900); font-size:1.8rem; font-weight:900; }
+.fab:active{ transform:translateX(-50%) scale(.94); }
+
+/* ---------- Buttons ---------- */
+.btn-brand{ background:var(--asphalt-800); border:none; color:#fff; font-weight:700; }
+.btn-brand:hover, .btn-brand:active{ background:var(--asphalt-700); color:#fff; }
+.btn-amber{ background:var(--amber-500); border:none; color:#161A22; font-weight:800; }
+.btn-amber:hover, .btn-amber:active{ background:var(--amber-400); color:#161A22; }
+.btn-tap{ border-radius:14px !important; padding:12px 16px !important; font-size:.9rem; }
+.btn-block-tap{ width:100%; border-radius:16px !important; padding:14px !important; font-size:.95rem; }
+
+.ripple{ position:relative; overflow:hidden; }
+.ripple-span{ position:absolute; border-radius:50%; background:rgba(255,255,255,.5); transform:scale(0); animation:rippleAnim .55s linear; pointer-events:none; }
+@keyframes rippleAnim{ to{ transform:scale(3); opacity:0; } }
+
+/* ---------- Forms ---------- */
+.form-label-m3{ font-size:.74rem; font-weight:700; color:var(--ink-600); text-transform:uppercase; letter-spacing:.03em; margin-bottom:6px; display:block; }
+.form-control-m3, .form-select-m3{ width:100%; border:1.5px solid var(--border-soft); background:var(--surface); color:var(--ink-900); border-radius:14px; padding:13px 14px; font-size:.92rem; transition:border-color .15s ease; }
+.form-control-m3:focus, .form-select-m3:focus{ outline:none; border-color:var(--amber-500); box-shadow:0 0 0 3px rgba(255,176,32,.18); }
+.field-group{ margin-bottom:16px; }
+
+.vtype-chip-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.vtype-chip{ background:var(--surface); border:1.5px solid var(--border-soft); border-radius:14px; padding:12px 4px; text-align:center; cursor:pointer; }
+.vtype-chip i{ font-size:1.15rem; color:var(--ink-600); }
+.vtype-chip span{ display:block; font-size:.64rem; font-weight:700; margin-top:5px; color:var(--ink-600); text-transform:uppercase; }
+.vtype-chip.selected{ border-color:var(--amber-500); background:rgba(255,176,32,.1); }
+.vtype-chip.selected i, .vtype-chip.selected span{ color:var(--asphalt-800); }
+
+.capture-box{ border:2px dashed var(--border-soft); border-radius:18px; aspect-ratio:4/3; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; background:var(--surface); overflow:hidden; position:relative; }
+.capture-box img{ width:100%; height:100%; object-fit:cover; }
+.capture-box .cap-hint{ font-size:.75rem; color:var(--ink-400); text-align:center; padding:0 20px; }
+.capture-remove{ position:absolute; top:8px; right:8px; width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,.55); color:#fff; border:none; display:flex; align-items:center; justify-content:center; }
+.detect-badge{ position:absolute; bottom:8px; left:8px; background:rgba(22,26,34,.85); color:#fff; font-size:.65rem; font-weight:700; padding:4px 10px; border-radius:20px; display:flex; align-items:center; gap:5px; }
+
+.offcanvas.m3-sheet{ border-radius:24px 24px 0 0; max-width:560px; margin-inline:auto; height:90vh; height:90dvh; }
+.sheet-handle{ width:36px; height:4px; background:var(--border-soft); border-radius:4px; margin:8px auto 4px; }
+
+.chip-row{ display:flex; gap:8px; overflow-x:auto; padding-bottom:2px; scrollbar-width:none; }
+.chip-row::-webkit-scrollbar{ display:none; }
+.filter-chip{ flex:none; border:1.5px solid var(--border-soft); background:var(--surface); border-radius:20px; padding:7px 14px; font-size:.75rem; font-weight:700; color:var(--ink-600); }
+.filter-chip.active{ background:var(--asphalt-800); border-color:var(--asphalt-800); color:#fff; }
+
+.empty-state{ text-align:center; padding:40px 20px; color:var(--ink-400); }
+.empty-state i{ font-size:2.4rem; margin-bottom:10px; display:block; }
+
+.loader-dots{ display:flex; gap:5px; justify-content:center; padding:20px; }
+.loader-dots span{ width:9px; height:9px; border-radius:50%; background:var(--amber-500); animation:loaderBounce 1s infinite ease-in-out; }
+.loader-dots span:nth-child(2){ animation-delay:.15s; } .loader-dots span:nth-child(3){ animation-delay:.3s; }
+@keyframes loaderBounce{ 0%,80%,100%{ transform:scale(.5); opacity:.4;} 40%{ transform:scale(1); opacity:1;} }
+
+.m3-switch{ position:relative; width:46px; height:26px; flex:none; }
+.m3-switch input{ opacity:0; width:0; height:0; }
+.m3-switch .track{ position:absolute; inset:0; background:var(--border-soft); border-radius:20px; transition:.2s; }
+.m3-switch .thumb{ position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:var(--shadow-sm); transition:.2s; }
+.m3-switch input:checked + .track{ background:var(--amber-500); }
+.m3-switch input:checked + .track .thumb{ transform:translateX(20px); }
+.settings-row{ display:flex; align-items:center; justify-content:space-between; padding:14px 4px; border-bottom:1px solid var(--border-soft); }
+.settings-row:last-child{ border-bottom:none; }
+.settings-row-text b{ font-size:.86rem; display:block; } .settings-row-text span{ font-size:.7rem; color:var(--ink-400); }
+
+/* ---------- License lock overlay ---------- */
+#licenseLockOverlay{ position:fixed; inset:0; background:radial-gradient(circle at 50% 0%, #1D2330 0%, #0E1116 70%); color:#fff; z-index:99999; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px; }
+#licenseLockOverlay .lock-badge{ width:78px; height:78px; border-radius:50%; background:repeating-linear-gradient(45deg, var(--amber-500) 0 8px, #1B1F27 8px 16px); display:flex; align-items:center; justify-content:center; margin-bottom:22px; box-shadow:var(--shadow-lg); }
+#licenseLockOverlay .lock-badge i{ font-size:2rem; color:#fff; }
+#licenseLockOverlay h2{ font-weight:800; margin-bottom:8px; }
+#licenseLockOverlay p{ font-family:var(--font-body); color:#9AA3B2; max-width:340px; font-size:.9rem; margin-bottom:24px; }
+.lic-box{ width:100%; max-width:340px; background:rgba(255,255,255,.05); padding:20px; border-radius:20px; border:1px solid rgba(255,255,255,.1); }
+
+/* ---------- Full-screen camera / scanner overlay ---------- */
+.fs-camera{ position:fixed; inset:0; background:#000; z-index:9000; display:none; flex-direction:column; }
+.fs-camera.active{ display:flex; }
+.fs-camera-header{ flex:none; display:flex; align-items:center; justify-content:space-between; padding:calc(14px + var(--safe-t)) 16px 12px; background:linear-gradient(#000, transparent); position:absolute; top:0; left:0; right:0; z-index:2; }
+.fs-camera-header .fc-title{ color:#fff; font-weight:700; font-size:.92rem; }
+.fs-camera-header button{ width:38px; height:38px; border-radius:50%; border:none; background:rgba(255,255,255,.15); color:#fff; display:flex; align-items:center; justify-content:center; }
+.fs-camera-video-wrap{ flex:1; position:relative; overflow:hidden; background:#000; }
+.fs-camera-video-wrap video{ width:100%; height:100%; object-fit:cover; }
+.fs-guide{ position:absolute; inset:0; pointer-events:none; display:flex; align-items:center; justify-content:center; }
+.fs-guide-box{ width:78%; aspect-ratio:16/8; border:3px solid var(--amber-500); border-radius:12px; box-shadow:0 0 0 2000px rgba(0,0,0,.35); }
+.fs-guide-box.qr{ aspect-ratio:1/1; width:68%; border-radius:22px; }
+.fs-scan-line{ position:absolute; left:12%; right:12%; height:2px; background:var(--amber-500); box-shadow:0 0 10px var(--amber-500); animation:scanMoveFs 1.8s infinite ease-in-out; }
+@keyframes scanMoveFs{ 0%,100%{ top:22%;} 50%{ top:78%;} }
+.fs-camera-footer{ flex:none; padding:22px 16px calc(26px + var(--safe-b)); display:flex; align-items:center; justify-content:center; background:linear-gradient(transparent, #000); position:absolute; bottom:0; left:0; right:0; z-index:2; }
+.fs-shutter{ width:70px; height:70px; border-radius:50%; background:#fff; border:5px solid rgba(255,255,255,.35); }
+.fs-shutter:active{ transform:scale(.92); }
+.fs-hint{ position:absolute; bottom:calc(120px + var(--safe-b)); left:0; right:0; text-align:center; color:#fff; font-size:.78rem; z-index:2; padding:0 30px; }
+
+/* ---------- Receipt / thermal print (minimum-paper, QR left / details right) ---------- */
+#printContainer{ display:none; position:fixed; top:0; left:-99999px; z-index:-1; }
+#tokenPrintArea{ width:280px; font-family:'Courier New', monospace; color:#000; background:#fff; padding:8px 10px; }
+#tokenPrintArea.w80{ width:302px; }
+#tokenPrintArea .t-center{ text-align:center; }
+#tokenPrintArea .t-logo{ width:40px; height:40px; object-fit:contain; margin:0 auto 4px; display:block; }
+#tokenPrintArea .t-title{ font-weight:800; font-size:16px; letter-spacing:1px; }
+#tokenPrintArea .t-addr{ font-size:9px; margin-top:2px; }
+#tokenPrintArea .t-rule{ border-top:1px dashed #000; margin:5px 0; }
+#tokenPrintArea .t-datetime{ text-align:center; font-size:11px; font-weight:700; }
+#tokenPrintArea .t-token{ text-align:center; font-size:20px; font-weight:900; letter-spacing:1px; margin:2px 0; }
+#tokenPrintArea .t-photo{ width:100%; max-height:95px; object-fit:cover; margin:4px 0; border:1px solid #000; filter:grayscale(1) contrast(1.25); }
+#tokenPrintArea .t-details-row{ display:flex; align-items:flex-start; gap:8px; margin:4px 0; }
+#tokenPrintArea .t-qr-block{ flex:none; width:78px; }
+#tokenPrintArea .t-qr-block img, #tokenPrintArea .t-qr-block canvas{ width:78px !important; height:78px !important; }
+#tokenPrintArea .t-info-block{ flex:1; min-width:0; }
+#tokenPrintArea .t-vehicle-name{ font-size:14px; font-weight:900; text-transform:uppercase; margin-bottom:2px; }
+#tokenPrintArea .t-info-line{ font-size:10.5px; font-weight:700; display:flex; justify-content:space-between; gap:6px; }
+#tokenPrintArea .t-info-line span:first-child{ color:#000; font-weight:600; }
+#tokenPrintArea .t-amt{ text-align:center; font-size:17px; font-weight:900; margin-top:2px; }
+#tokenPrintArea .t-company{ font-weight:700; font-size:8.5px; margin-top:3px; text-transform:uppercase; }
+#tokenPrintArea .t-urdu{ font-family:'Noto Nastaliq Urdu', serif; direction:rtl; font-size:11px; font-weight:700; line-height:1.7; margin-top:4px; white-space:pre-wrap; }
+
+@media print{
+  @page{ margin:0; }
+  body *{ visibility:hidden; }
+  #printContainer{ display:flex !important; visibility:visible !important; position:absolute !important; top:0 !important; left:0 !important; z-index:1 !important; width:100vw; justify-content:center; align-items:flex-start; padding-top:14px; background:#fff; }
+  #tokenPrintArea, #tokenPrintArea *{ visibility:visible !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== LICENSE LOCK OVERLAY ===================== -->
+<div id="licenseLockOverlay">
+  <div class="lock-badge"><i class="bi bi-shield-lock-fill"></i></div>
+  <h2 class="font-display">License Required</h2>
+  <p>Enter a valid license key to unlock Parking Stand and start managing tokens.</p>
+  <div class="lic-box">
+    <div class="mb-3">
+      <input type="text" id="activationKeyInput" class="form-control form-control-m3 text-center fw-bold" placeholder="Enter license key" style="letter-spacing:1px; background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.15);">
+    </div>
+    <div class="mb-3 text-start" id="dateSelectionBlock" style="display:none;">
+      <label class="form-label-m3" style="color:#9AA3B2;">Select license expiry date &amp; time</label>
+      <input type="datetime-local" id="expiryDateTimeInput" class="form-control form-control-m3" style="background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.15);">
+    </div>
+    <button id="activateBtn" class="btn btn-amber btn-block-tap ripple" type="button">Verify &amp; Activate</button>
+  </div>
+  <div style="margin-top:18px; font-size:.68rem; color:#5B6472;">Validity left: <span id="validityCounter">--h --m --s</span></div>
+</div>
+
+<!-- ===================== APP SHELL ===================== -->
+<div id="appShell">
+
+  <div class="app-topbar">
+    <div class="row1">
+      <div class="brand">
+        <div class="brand-mark"><i class="bi bi-p-circle-fill"></i></div>
+        <div>
+          <div class="brand-name" id="topbarParkingName">Parking Stand</div>
+          <div class="brand-sub" id="topbarClock">-- --- ---- • --:--:-- --</div>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="topbar-icon-btn ripple" id="btnGlobalSearch"><i class="bi bi-search"></i></button>
+        <button class="topbar-icon-btn ripple" id="btnMoreSheet"><i class="bi bi-grid-3x3-gap-fill"></i></button>
+      </div>
+    </div>
+    <div class="screen-title-row">
+      <div>
+        <div class="screen-title" id="screenTitle">Dashboard</div>
+        <div class="screen-caption" id="screenCaption">Live overview of your parking stand</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell-scroll" id="shellScroll">
+  <div class="app-body">
+
+    <!-- ===================== SCREEN: DASHBOARD ===================== -->
+    <section class="screen active" id="screen-dashboard">
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--go-100); color:var(--go-500);"><i class="bi bi-car-front-fill"></i></div>
+          <div class="stat-label">Today's Vehicles</div>
+          <div class="stat-value" id="dsVehiclesToday">0</div>
+          <div class="stat-sub" id="dsVehiclesTodaySub">entries recorded</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(255,176,32,.15); color:var(--amber-500);"><i class="bi bi-hourglass-split"></i></div>
+          <div class="stat-label">Active Parking</div>
+          <div class="stat-value" id="dsActiveNow">0</div>
+          <div class="stat-sub">currently parked</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--go-100); color:var(--go-500);"><i class="bi bi-cash-coin"></i></div>
+          <div class="stat-label">Today's Collection</div>
+          <div class="stat-value" id="dsCollection">Rs.0</div>
+          <div class="stat-sub" id="dsCollectionSub">--</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--stop-100); color:var(--stop-500);"><i class="bi bi-box-arrow-right"></i></div>
+          <div class="stat-label">Today's Exits</div>
+          <div class="stat-value" id="dsExitsToday">0</div>
+          <div class="stat-sub">vehicles checked out</div>
+        </div>
+      </div>
+
+      <div class="section-label">Parking Capacity</div>
+      <div class="capacity-card card">
+        <div class="ring-wrap">
+          <svg width="84" height="84" viewBox="0 0 84 84">
+            <circle class="ring-bg" cx="42" cy="42" r="36"></circle>
+            <circle class="ring-fg" id="capacityRing" cx="42" cy="42" r="36" stroke-dasharray="226" stroke-dashoffset="226"></circle>
+          </svg>
+          <div class="ring-center"><b id="capacityPct">0%</b><span>Full</span></div>
+        </div>
+        <div style="flex:1;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <span style="font-size:.78rem; color:var(--ink-600);">Occupied Slots</span>
+            <b id="occupiedSlots" style="font-family:var(--font-display);">0</b>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:.78rem; color:var(--ink-600);">Available Slots</span>
+            <b id="availableSlots" style="font-family:var(--font-display); color:var(--go-500);">0</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">Vehicle Type Statistics</div>
+      <div class="vtype-scroll" id="vtypeStats"></div>
+
+      <div class="section-label">Quick Actions</div>
+      <div class="qa-grid">
+        <button class="qa-btn ripple" data-goto="new-entry"><i class="bi bi-plus-circle"></i><div>New Entry</div></button>
+        <button class="qa-btn ripple" data-goto="exit"><i class="bi bi-qr-code-scan"></i><div>Scan Exit</div></button>
+        <button class="qa-btn ripple" id="qaManualExit"><i class="bi bi-search"></i><div>Manual Exit</div></button>
+        <button class="qa-btn ripple" data-goto="history"><i class="bi bi-clock-history"></i><div>History</div></button>
+      </div>
+
+      <div class="section-label">Recent Activity<span class="see-all" data-goto="history">See all</span></div>
+      <div id="recentActivityList"></div>
+    </section>
+
+    <!-- ===================== SCREEN: NEW ENTRY ===================== -->
+    <section class="screen" id="screen-new-entry">
+      <div class="field-group">
+        <label class="form-label-m3">Vehicle Type</label>
+        <div class="vtype-chip-grid" id="vtypeChipGrid"></div>
+      </div>
+
+      <div class="field-group">
+        <label class="form-label-m3">Vehicle Photo</label>
+        <div class="capture-box" id="captureBox">
+          <i class="bi bi-camera-fill" style="font-size:1.8rem; color:var(--ink-400);"></i>
+          <div class="cap-hint">Tap to capture the vehicle &amp; auto-read the number plate</div>
+        </div>
+        <button class="btn btn-brand btn-block-tap ripple mt-2" id="btnOpenCamera" type="button"><i class="bi bi-camera me-1"></i> Capture Image</button>
+      </div>
+
+      <div class="field-group">
+        <label class="form-label-m3">Vehicle Number</label>
+        <input type="text" class="form-control-m3" id="entryVehicleNumber" placeholder="e.g. 2024 (auto-filled from plate, editable)">
+        <div class="stat-sub mt-1" id="ocrStatusLine"></div>
+      </div>
+
+      <div class="row g-2">
+        <div class="col-6 field-group">
+          <label class="form-label-m3">Owner Name <span class="text-muted">(optional)</span></label>
+          <input type="text" class="form-control-m3" id="entryOwnerName" placeholder="Full name">
+        </div>
+        <div class="col-6 field-group">
+          <label class="form-label-m3">Mobile Number <span class="text-muted">(optional)</span></label>
+          <input type="tel" class="form-control-m3" id="entryMobile" placeholder="03xx-xxxxxxx">
+        </div>
+      </div>
+
+      <div class="row g-2">
+        <div class="col-6 field-group">
+          <label class="form-label-m3">Parking Area</label>
+          <select class="form-select-m3" id="entryArea"></select>
+        </div>
+        <div class="col-6 field-group">
+          <label class="form-label-m3">Slot Number</label>
+          <input type="text" class="form-control-m3" id="entrySlot" placeholder="e.g. A-12">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="form-label-m3">Entry Time</label>
+        <input type="text" class="form-control-m3" id="entryTimeDisplay" readonly>
+      </div>
+
+      <div class="field-group">
+        <label class="form-label-m3">Notes</label>
+        <textarea class="form-control-m3" id="entryNotes" rows="2" placeholder="Any remarks..."></textarea>
+      </div>
+
+      <button class="btn btn-amber btn-block-tap ripple" id="btnSavePrintEntry" type="button"><i class="bi bi-printer-fill me-1"></i> Save &amp; Print Token</button>
+    </section>
+
+    <!-- ===================== SCREEN: EXIT ===================== -->
+    <section class="screen" id="screen-exit">
+      <div class="chip-row mb-3">
+        <button class="filter-chip active ripple" data-exitmode="qr">Scan QR</button>
+        <button class="filter-chip ripple" data-exitmode="manual">Manual Exit</button>
+      </div>
+
+      <div id="exitModeQr">
+        <button class="btn btn-brand btn-block-tap ripple" id="btnStartScan" type="button"><i class="bi bi-camera-video me-1"></i> Open Camera Scanner</button>
+        <div class="empty-state"><i class="bi bi-qr-code-scan"></i>Point the camera at the token's QR code to fetch the vehicle instantly.</div>
+      </div>
+
+      <div id="exitModeManual" style="display:none;">
+        <div class="field-group">
+          <label class="form-label-m3">Token / Vehicle Number / Mobile</label>
+          <div class="d-flex gap-2">
+            <input type="text" class="form-control-m3" id="exitSearchInput" placeholder="Enter any of these...">
+            <button class="btn btn-brand ripple" style="border-radius:14px;" id="btnExitSearch" type="button"><i class="bi bi-search"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div id="exitResultWrap"></div>
+    </section>
+
+    <!-- ===================== SCREEN: HISTORY ===================== -->
+    <section class="screen" id="screen-history">
+      <div class="field-group">
+        <input type="text" class="form-control-m3" id="historySearchInput" placeholder="Search token, vehicle no, mobile, owner...">
+      </div>
+      <div class="chip-row mb-2" id="historyDateChips">
+        <button class="filter-chip active ripple" data-range="today">Today</button>
+        <button class="filter-chip ripple" data-range="yesterday">Yesterday</button>
+        <button class="filter-chip ripple" data-range="week">This Week</button>
+        <button class="filter-chip ripple" data-range="all">All</button>
+      </div>
+      <div class="chip-row mb-3" id="historyStatusChips">
+        <button class="filter-chip active ripple" data-status="all">All Status</button>
+        <button class="filter-chip ripple" data-status="active">Active</button>
+        <button class="filter-chip ripple" data-status="exited">Exited</button>
+        <button class="filter-chip ripple" data-status="paid">Paid</button>
+        <button class="filter-chip ripple" data-status="unpaid">Unpaid</button>
+      </div>
+      <div id="historyList"></div>
+    </section>
+
+  </div>
+  </div>
+
+  <!-- ===================== BOTTOM NAVIGATION ===================== -->
+  <nav class="bottom-nav" id="bottomNav">
+    <button class="nav-item active ripple" data-nav="dashboard"><span class="nav-pill"></span><i class="bi bi-house-door-fill"></i><span>Home</span></button>
+    <button class="nav-item ripple" data-nav="history"><span class="nav-pill"></span><i class="bi bi-clock-history"></i><span>History</span></button>
+    <div class="nav-fab-slot"></div>
+    <button class="nav-item ripple" data-nav="exit"><span class="nav-pill"></span><i class="bi bi-box-arrow-right"></i><span>Exit</span></button>
+    <button class="nav-item ripple" id="navSettings"><span class="nav-pill"></span><i class="bi bi-gear-fill"></i><span>Settings</span></button>
+  </nav>
+  <button class="fab ripple" id="fabNewEntry"><i class="bi bi-plus-lg"></i></button>
+</div>
+
+<!-- ===================== FULLSCREEN CAMERA / QR SCANNER OVERLAY ===================== -->
+<div class="fs-camera" id="fsCamera">
+  <div class="fs-camera-header">
+    <div class="fc-title" id="fsCameraTitle">Capture Vehicle</div>
+    <button id="btnCloseFsCamera" type="button"><i class="bi bi-x-lg"></i></button>
+  </div>
+  <div class="fs-camera-video-wrap">
+    <video id="fsVideo" playsinline muted autoplay></video>
+    <canvas id="fsCanvas" style="display:none;"></canvas>
+    <div class="fs-guide" id="fsGuide"><div class="fs-guide-box" id="fsGuideBox"></div></div>
+    <div class="fs-scan-line" id="fsScanLine" style="display:none;"></div>
+  </div>
+  <div class="fs-hint" id="fsHint">Center the number plate in frame for best OCR accuracy.</div>
+  <div class="fs-camera-footer" id="fsFooter">
+    <button class="fs-shutter ripple" id="btnFsShutter" type="button"></button>
+  </div>
+</div>
+
+<!-- ===================== MORE SHEET ===================== -->
+<div class="offcanvas offcanvas-bottom m3-sheet" tabindex="-1" id="moreSheet">
+  <div class="sheet-handle"></div>
+  <div class="offcanvas-body px-3 pb-4">
+    <h6 class="font-display fw-bold mb-3">More</h6>
+    <div class="d-flex flex-column gap-2">
+      <button class="qa-btn ripple text-start d-flex align-items-center gap-3" style="padding:14px;" id="btnOpenSettingsFromSheet" type="button"><i class="bi bi-gear-fill"></i><div style="font-size:.85rem; font-weight:700; margin:0;">Settings</div></button>
+      <button class="qa-btn ripple text-start d-flex align-items-center gap-3" style="padding:14px;" id="btnBackup" type="button"><i class="bi bi-cloud-download-fill"></i><div style="font-size:.85rem; font-weight:700; margin:0;">Backup Data</div></button>
+      <label class="qa-btn ripple text-start d-flex align-items-center gap-3 mb-0" style="padding:14px; cursor:pointer;"><i class="bi bi-cloud-upload-fill"></i><div style="font-size:.85rem; font-weight:700; margin:0;">Restore Data</div><input type="file" id="restoreFileInput" accept="application/json" style="display:none;"></label>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== GLOBAL SEARCH SHEET ===================== -->
+<div class="offcanvas offcanvas-bottom m3-sheet" tabindex="-1" id="searchSheet">
+  <div class="sheet-handle"></div>
+  <div class="offcanvas-body px-3 pb-4">
+    <input type="text" class="form-control-m3 mb-3" id="globalSearchInput" placeholder="Search vehicle no, token, mobile, owner...">
+    <div id="globalSearchResults"></div>
+  </div>
+</div>
+
+<!-- ===================== RECORD DETAIL / EXIT CONFIRM SHEET ===================== -->
+<div class="offcanvas offcanvas-bottom m3-sheet" tabindex="-1" id="exitConfirmSheet">
+  <div class="sheet-handle"></div>
+  <div class="offcanvas-body px-3 pb-4" id="exitConfirmBody"></div>
+</div>
+
+<!-- ===================== SETTINGS SCREEN (full overlay) ===================== -->
+<div id="settingsOverlay" style="display:none; position:fixed; inset:0; z-index:1050; background:var(--paper); overflow-y:auto; max-width:560px; margin-inline:auto;">
+  <div class="app-topbar">
+    <div class="row1">
+      <div class="brand">
+        <button class="topbar-icon-btn ripple" id="btnCloseSettings"><i class="bi bi-arrow-left"></i></button>
+        <div>
+          <div class="brand-name">Settings</div>
+          <div class="brand-sub">Parking stand configuration</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-body" style="padding-bottom:40px;">
+
+    <div class="section-label">License</div>
+    <div class="card p-3 mb-2 d-flex flex-row align-items-center justify-content-between">
+      <div>
+        <div class="stat-label">Validity Remaining</div>
+        <div class="stat-value" id="settingsValidityCounter" style="font-size:1.1rem;">--h --m --s</div>
+      </div>
+      <i class="bi bi-shield-check" style="font-size:1.6rem; color:var(--go-500);"></i>
+    </div>
+
+    <div class="section-label">Parking Information</div>
+    <div class="card p-3 mb-2">
+      <div class="field-group">
+        <label class="form-label-m3">Parking Name</label>
+        <input type="text" class="form-control-m3" id="setParkingName">
+      </div>
+      <div class="field-group">
+        <label class="form-label-m3">Address</label>
+        <input type="text" class="form-control-m3" id="setAddress">
+      </div>
+      <div class="field-group">
+        <label class="form-label-m3">Receipt Footer Message (Urdu)</label>
+        <textarea class="form-control-m3 font-nastaliq" id="setUrduFooter" rows="2" dir="rtl" placeholder="مثال کے طور پر: دوبارہ تشریف آوری کا شکریہ"></textarea>
+        <div class="stat-sub mt-1">Yeh sirf print hone wali receipt par show hoga, app ke andar kahin aur nahi.</div>
+      </div>
+      <div class="field-group mb-0">
+        <label class="form-label-m3">Logo</label>
+        <div class="d-flex align-items-center gap-3">
+          <img id="logoPreview" src="" style="width:52px;height:52px;border-radius:12px;object-fit:cover;background:var(--border-soft); display:none;">
+          <label class="btn btn-outline-secondary btn-tap ripple mb-0"><i class="bi bi-upload me-1"></i>Upload<input type="file" id="logoInput" accept="image/*" style="display:none;"></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Vehicle Rates</div>
+    <div class="card p-3 mb-2" id="ratesEditor"></div>
+
+    <div class="section-label">Parking Areas &amp; Capacity</div>
+    <div class="card p-3 mb-2" id="capacityEditor"></div>
+    <button class="btn btn-outline-secondary btn-tap ripple w-100 mb-3" id="btnAddArea" type="button"><i class="bi bi-plus-lg me-1"></i>Add Area</button>
+
+    <div class="section-label">Printer Settings</div>
+    <div class="card p-3 mb-2">
+      <label class="form-label-m3">Receipt Width</label>
+      <select class="form-select-m3" id="setPrinterWidth">
+        <option value="58">58mm Thermal</option>
+        <option value="80">80mm Thermal</option>
+      </select>
+    </div>
+
+    <button class="btn btn-amber btn-block-tap ripple mt-2" id="btnSaveSettings" type="button">Save Settings</button>
+  </div>
+</div>
+
+<!-- ===================== PRINT RECEIPT TEMPLATE (minimum-paper: QR left / details right) ===================== -->
+<div id="printContainer">
+  <div id="tokenPrintArea">
+    <div class="t-center">
+      <img id="rcLogo" class="t-logo" style="display:none;">
+      <div class="t-title" id="rcParkingName">PARKING STAND</div>
+      <div class="t-addr" id="rcAddress"></div>
+    </div>
+    <div class="t-rule"></div>
+    <div class="t-datetime" id="rcDateTime">-- --- ----, --:-- --</div>
+    <div class="t-rule"></div>
+    <div class="t-token" id="rcToken">#0000</div>
+    <img id="rcPhoto" class="t-photo" style="display:none;">
+    <div class="t-details-row">
+      <div class="t-qr-block" id="rcQr"></div>
+      <div class="t-info-block">
+        <div class="t-vehicle-name" id="rcVehicleType">--</div>
+        <div class="t-info-line" id="rcLineVehicleNo" style="display:none;"><span>No:</span><span id="rcVehicleNo"></span></div>
+        <div class="t-info-line" id="rcLineSlot" style="display:none;"><span>Slot:</span><span id="rcSlot"></span></div>
+        <div class="t-info-line" id="rcLineOwner" style="display:none;"><span>Owner:</span><span id="rcOwner"></span></div>
+        <div class="t-info-line" id="rcLineMobile" style="display:none;"><span>Mobile:</span><span id="rcMobile"></span></div>
+        <div class="t-info-line" id="rcLineDuration" style="display:none;"><span>Duration:</span><span id="rcDuration"></span></div>
+      </div>
+    </div>
+    <div class="t-rule"></div>
+    <div class="t-amt" id="rcAmount">Entry Token</div>
+    <div class="t-rule"></div>
+    <div class="t-center t-company" id="rcOperator">Operator: --</div>
+    <div class="t-center t-urdu" id="rcCustomUrdu" style="display:none;"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   1. CONFIG, INTERNET-SYNCED PAKISTAN TIME & LICENSE WATCHDOG
+============================================================ */
+dayjs.extend(dayjs_plugin_utc);
+dayjs.extend(dayjs_plugin_timezone);
+const TZ = 'Asia/Karachi';
+
+let timeOffsetMs = 0; // serverTime - deviceTime, keeps clock & license accurate & tamper-resistant
+function syncedNow(){ return Date.now() + timeOffsetMs; }
+function nowKarachi(){ return dayjs(syncedNow()).tz(TZ); }
+
+function fetchWithTimeout(url, ms){
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  return fetch(url, { cache:'no-store', signal:ctrl.signal }).finally(() => clearTimeout(t));
+}
+async function syncInternetTime(){
+  try{
+    const res = await fetchWithTimeout('https://worldtimeapi.org/api/timezone/Asia/Karachi', 4000);
+    const data = await res.json();
+    const serverMs = new Date(data.utc_datetime).getTime();
+    if(!isNaN(serverMs)) timeOffsetMs = serverMs - Date.now();
+  }catch(e){
+    try{
+      const res2 = await fetchWithTimeout('https://worldtimeapi.org/api/ip', 4000);
+      const data2 = await res2.json();
+      const serverMs2 = new Date(data2.utc_datetime).getTime();
+      if(!isNaN(serverMs2)) timeOffsetMs = serverMs2 - Date.now();
+    }catch(e2){ /* offline or unreachable: fall back silently to device clock */ }
+  }
+}
+
+const CONFIG = {
+  keyCustomExpiry: '7d66ffc9c27284c761617446cd08955bd0cb89529ede0f41e94cec7729379d5e',
+  keyDemo12Hours: '243ee1dba09c0d9f6f8b90e7c49e51e1521ecaefea2c42a289bac2ccfe49dbb3',
+  storageKeys: {
+    records: 'ps_records', counter: 'ps_counter', settings: 'ps_settings',
+    savedExpiry: 'ps_license_expiry_timestamp', savedKey: 'ps_active_license_key'
+  }
+};
+
+const DEFAULT_SETTINGS = {
+  parkingName: 'Parking Stand', address: 'Main Boulevard, City', urduFooter: 'دوبارہ تشریف آوری کا شکریہ', operator: 'Operator',
+  logo: '', printerWidth: '58',
+  rates: { Bike:30, Car:50, Van:80, Rickshaw:30, Loader:100, Truck:150, Bus:120, Other:50 },
+  areas: [ { name:'Ground Floor', capacity:40 }, { name:'Basement', capacity:30 } ]
+};
+const VEHICLE_ICONS = {
+  Bike:'bi-bicycle', Car:'bi-car-front-fill', Van:'bi-truck-front-fill', Rickshaw:'bi-scooter',
+  Loader:'bi-truck-flatbed', Truck:'bi-truck', Bus:'bi-bus-front-fill', Other:'bi-question-diamond-fill'
+};
+
+function loadSettings(){
+  try{
+    const raw = localStorage.getItem(CONFIG.storageKeys.settings);
+    if(!raw) return JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+    return Object.assign(JSON.parse(JSON.stringify(DEFAULT_SETTINGS)), JSON.parse(raw));
+  }catch(e){ return JSON.parse(JSON.stringify(DEFAULT_SETTINGS)); }
+}
+function saveSettings(s){ localStorage.setItem(CONFIG.storageKeys.settings, JSON.stringify(s)); }
+let SETTINGS = loadSettings();
+
+// Workbox Service Worker setup
+if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(e => console.warn('SW error:', e));
+  });
+}
+
+// Dexie Database setup
+const db = new Dexie('ParkingStandDB');
+db.version(1).stores({
+  records: 'token, vehicleNumber, mobile, ownerName, status, entryTs, exitTs, area'
+});
+
+async function migrateLocalStorageToDexie() {
+  try {
+    const count = await db.records.count();
+    if (count === 0) {
+      const raw = localStorage.getItem(CONFIG.storageKeys.records);
+      if (raw) {
+        const oldRecords = JSON.parse(raw);
+        if (oldRecords.length > 0) {
+          await db.records.bulkPut(oldRecords);
+          console.log(`Migrated ${oldRecords.length} records to IndexedDB.`);
+        }
+      }
+    }
+  } catch (e) {
+    console.error('Migration error:', e);
+  }
+}
+
+function nextTokenNo(){
+  let n = parseInt(localStorage.getItem(CONFIG.storageKeys.counter) || '0', 10);
+  n += 1; localStorage.setItem(CONFIG.storageKeys.counter, String(n)); return n;
+}
+
+/* ---------- License watchdog (kept from the original app, now tamper-resistant via synced time) ---------- */
+function checkLicenseStatus(){
+  const overlay = document.getElementById('licenseLockOverlay');
+  const shell = document.getElementById('appShell');
+  const fab = document.getElementById('fabNewEntry');
+  const counterDisplay = document.getElementById('validityCounter');
+  const settingsCounter = document.getElementById('settingsValidityCounter');
+
+  const activeKey = localStorage.getItem(CONFIG.storageKeys.savedKey);
+  const expiryTimestamp = localStorage.getItem(CONFIG.storageKeys.savedExpiry);
+
+  if(!activeKey || !expiryTimestamp){
+    overlay.style.display = 'flex'; shell.style.display = 'none'; fab.style.display = 'none';
+    closeFsCamera();
+    const settingsOv = document.getElementById('settingsOverlay');
+    if(settingsOv) settingsOv.style.display = 'none';
+    return false;
+  }
+  const timeLeftMs = parseInt(expiryTimestamp, 10) - syncedNow();
+  if(timeLeftMs <= 0){
+    overlay.style.display = 'flex'; shell.style.display = 'none'; fab.style.display = 'none';
+    counterDisplay.textContent = 'EXPIRED'; counterDisplay.style.color = '#E5484D';
+    if(settingsCounter){ settingsCounter.textContent = 'EXPIRED'; settingsCounter.style.color = '#E5484D'; }
+    closeFsCamera();
+    const settingsOv2 = document.getElementById('settingsOverlay');
+    if(settingsOv2) settingsOv2.style.display = 'none';
+    return false;
+  }
+  overlay.style.display = 'none'; shell.style.display = 'flex'; fab.style.display = 'flex';
+  const totalSecs = Math.floor(timeLeftMs/1000);
+  const h = Math.floor(totalSecs/3600), m = Math.floor((totalSecs%3600)/60), s = totalSecs%60;
+  const label = `${h}h ${m}m ${s}s`;
+  counterDisplay.textContent = label; counterDisplay.style.color = '#FFB020';
+  if(settingsCounter){ settingsCounter.textContent = label; settingsCounter.style.color = 'var(--go-500)'; }
+  return true;
+}
+
+async function hashKey(text) {
+  const msgBuffer = new TextEncoder().encode(text);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function handleActivation(){
+  const inputKey = document.getElementById('activationKeyInput').value.trim();
+  const dateBlock = document.getElementById('dateSelectionBlock');
+  const dateTimeInput = document.getElementById('expiryDateTimeInput').value;
+  const hashedInput = await hashKey(inputKey);
+
+  if(hashedInput === CONFIG.keyCustomExpiry){
+    if(dateBlock.style.display === 'none'){
+      dateBlock.style.display = 'block';
+      Swal.fire({ icon:'info', title:'Date Required', text:'Please select the expiry date and time below.', confirmButtonColor:'#161A22' });
+      return;
+    }
+    if(!dateTimeInput){
+      Swal.fire({ icon:'warning', title:'Selection Missing', text:'Please select a valid expiry date & time.', confirmButtonColor:'#161A22' });
+      return;
+    }
+    const expiryMs = new Date(dateTimeInput).getTime();
+    if(expiryMs <= syncedNow()){
+      Swal.fire({ icon:'error', title:'Invalid Date', text:'Expiry date must be in the future.', confirmButtonColor:'#161A22' });
+      return;
+    }
+    localStorage.setItem(CONFIG.storageKeys.savedKey, hashedInput);
+    localStorage.setItem(CONFIG.storageKeys.savedExpiry, expiryMs.toString());
+    Swal.fire({ icon:'success', title:'Activated Successfully!', text:'Custom license running.', confirmButtonColor:'#161A22' }).then(() => {
+      dateBlock.style.display = 'none'; checkLicenseStatus();
+    });
+  } else if(hashedInput === CONFIG.keyDemo12Hours){
+    dateBlock.style.display = 'none';
+    const twelveHoursLaterMs = syncedNow() + (12*60*60*1000);
+    localStorage.setItem(CONFIG.storageKeys.savedKey, hashedInput);
+    localStorage.setItem(CONFIG.storageKeys.savedExpiry, twelveHoursLaterMs.toString());
+    Swal.fire({ icon:'success', title:'Demo Activated!', text:'System unlocked for 12 hours.', confirmButtonColor:'#161A22' }).then(() => checkLicenseStatus());
+  } else {
+    Swal.fire({ icon:'error', title:'Invalid License Key', text:'The license key entered is incorrect.', confirmButtonColor:'#161A22' });
+  }
+}
+document.getElementById('activationKeyInput').addEventListener('input', async function(e){
+  const hashedInput = await hashKey(e.target.value.trim());
+  document.getElementById('dateSelectionBlock').style.display = (hashedInput === CONFIG.keyCustomExpiry) ? 'block' : 'none';
+});
+</script>
+<script>
+/* ============================================================
+   2. UTILITIES: toast, ripple, navigation
+============================================================ */
+function toastSuccess(msg){ Swal.fire({ toast:true, position:'top-end', icon:'success', title:msg, showConfirmButton:false, timer:2000, timerProgressBar:true }); }
+function toastWarn(msg){ Swal.fire({ toast:true, position:'top-end', icon:'warning', title:msg, showConfirmButton:false, timer:2200, timerProgressBar:true }); }
+function toastError(msg){ Swal.fire({ toast:true, position:'top-end', icon:'error', title:msg, showConfirmButton:false, timer:2400, timerProgressBar:true }); }
+
+document.addEventListener('click', function(e){
+  const el = e.target.closest('.ripple');
+  if(!el) return;
+  const rect = el.getBoundingClientRect();
+  const span = document.createElement('span');
+  const size = Math.max(rect.width, rect.height);
+  span.className = 'ripple-span';
+  span.style.width = span.style.height = size + 'px';
+  span.style.left = (e.clientX - rect.left - size/2) + 'px';
+  span.style.top = (e.clientY - rect.top - size/2) + 'px';
+  el.appendChild(span);
+  setTimeout(() => span.remove(), 560);
+});
+
+const SCREEN_META = {
+  'dashboard': { title:'Dashboard', caption:'Live overview of your parking stand' },
+  'new-entry': { title:'New Entry', caption:'Register an incoming vehicle' },
+  'exit': { title:'Vehicle Exit', caption:'Scan or search to check out' },
+  'history': { title:'History', caption:'All parking activity' },
+};
+
+function goto(screenId){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('screen-' + screenId);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('.nav-item[data-nav]').forEach(n => n.classList.toggle('active', n.dataset.nav === screenId));
+  const meta = SCREEN_META[screenId];
+  if(meta){ document.getElementById('screenTitle').textContent = meta.title; document.getElementById('screenCaption').textContent = meta.caption; }
+  document.getElementById('shellScroll').scrollTo({ top:0, behavior:'instant' });
+  if(screenId === 'dashboard') renderDashboard();
+  if(screenId === 'new-entry') prepareNewEntryScreen();
+  if(screenId === 'exit') prepareExitScreen();
+  if(screenId === 'history') renderHistoryScreen();
+}
+document.querySelectorAll('[data-nav]').forEach(btn => btn.addEventListener('click', () => goto(btn.dataset.nav)));
+document.querySelectorAll('[data-goto]').forEach(btn => btn.addEventListener('click', () => goto(btn.dataset.goto)));
+document.getElementById('fabNewEntry').addEventListener('click', () => goto('new-entry'));
+document.getElementById('qaManualExit').addEventListener('click', () => {
+  goto('exit');
+  document.querySelector('[data-exitmode="manual"]').click();
+});
+document.getElementById('navSettings').addEventListener('click', () => openSettingsScreen());
+
+function tickClock(){
+  const t = nowKarachi();
+  document.getElementById('topbarClock').textContent = t.format('DD MMM YYYY') + ' • ' + t.format('hh:mm:ss A');
+}
+
+/* Bootstrap offcanvas helpers */
+let moreSheetEl, searchSheetEl, exitConfirmSheetEl;
+document.getElementById('btnMoreSheet').addEventListener('click', () => moreSheetEl.show());
+document.getElementById('btnGlobalSearch').addEventListener('click', () => { searchSheetEl.show(); renderGlobalSearch(''); });
+document.getElementById('btnOpenSettingsFromSheet').addEventListener('click', () => { moreSheetEl.hide(); openSettingsScreen(); });
+
+document.getElementById('globalSearchInput').addEventListener('input', function(){ renderGlobalSearch(this.value.trim().toLowerCase()); });
+async function renderGlobalSearch(q){
+  const wrap = document.getElementById('globalSearchResults');
+  if(!q){ wrap.innerHTML = '<div class="empty-state"><i class="bi bi-search"></i>Search by vehicle number, token, mobile or owner name.</div>'; return; }
+  const records = await db.records.toArray();
+  const list = records.filter(r =>
+    String(r.token).includes(q) || (r.vehicleNumber||'').toLowerCase().includes(q) ||
+    (r.mobile||'').toLowerCase().includes(q) || (r.ownerName||'').toLowerCase().includes(q)
+  ).sort((a,b) => b.entryTs - a.entryTs).slice(0, 30);
+  wrap.innerHTML = list.length ? list.map(recordStubHTML).join('') : '<div class="empty-state"><i class="bi bi-emoji-frown"></i>No matching records found.</div>';
+  bindStubClicks(wrap);
+}
+</script>
+<script>
+/* ============================================================
+   3. SETTINGS SCREEN
+============================================================ */
+function openSettingsScreen(){
+  if(moreSheetEl) moreSheetEl.hide();
+  document.getElementById('setParkingName').value = SETTINGS.parkingName;
+  document.getElementById('setAddress').value = SETTINGS.address;
+  document.getElementById('setUrduFooter').value = SETTINGS.urduFooter || '';
+  document.getElementById('setPrinterWidth').value = SETTINGS.printerWidth;
+  if(SETTINGS.logo){ document.getElementById('logoPreview').src = SETTINGS.logo; document.getElementById('logoPreview').style.display = 'block'; }
+  renderRatesEditor();
+  renderCapacityEditor();
+  document.getElementById('settingsOverlay').style.display = 'block';
+}
+document.getElementById('btnCloseSettings').addEventListener('click', () => document.getElementById('settingsOverlay').style.display = 'none');
+
+function renderRatesEditor(){
+  const wrap = document.getElementById('ratesEditor');
+  wrap.innerHTML = Object.keys(SETTINGS.rates).map(type => `
+    <div class="d-flex align-items-center justify-content-between mb-2">
+      <span style="font-size:.85rem; font-weight:600;"><i class="bi ${VEHICLE_ICONS[type]} me-2" style="color:var(--amber-500);"></i>${type}</span>
+      <input type="number" class="form-control-m3" style="width:110px; padding:8px 10px;" data-rate="${type}" value="${SETTINGS.rates[type]}">
+    </div>
+  `).join('');
+}
+function renderCapacityEditor(){
+  const wrap = document.getElementById('capacityEditor');
+  wrap.innerHTML = SETTINGS.areas.map((a, i) => `
+    <div class="d-flex align-items-center gap-2 mb-2">
+      <input type="text" class="form-control-m3" style="flex:1;" data-area-name="${i}" value="${a.name}" placeholder="Area name">
+      <input type="number" class="form-control-m3" style="width:90px;" data-area-cap="${i}" value="${a.capacity}" placeholder="Slots">
+      <button class="topbar-icon-btn ripple" style="background:var(--stop-100); color:var(--stop-500);" data-area-remove="${i}"><i class="bi bi-trash"></i></button>
+    </div>
+  `).join('');
+  wrap.querySelectorAll('[data-area-remove]').forEach(b => b.addEventListener('click', () => {
+    SETTINGS.areas.splice(parseInt(b.dataset.areaRemove,10), 1); renderCapacityEditor();
+  }));
+}
+document.getElementById('btnAddArea').addEventListener('click', () => { SETTINGS.areas.push({ name:'New Area', capacity:20 }); renderCapacityEditor(); });
+document.getElementById('logoInput').addEventListener('change', function(e){
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    SETTINGS.logo = ev.target.result;
+    document.getElementById('logoPreview').src = SETTINGS.logo;
+    document.getElementById('logoPreview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+});
+document.getElementById('btnSaveSettings').addEventListener('click', () => {
+  SETTINGS.parkingName = document.getElementById('setParkingName').value.trim() || 'Parking Stand';
+  SETTINGS.address = document.getElementById('setAddress').value.trim();
+  SETTINGS.urduFooter = document.getElementById('setUrduFooter').value.trim();
+  SETTINGS.printerWidth = document.getElementById('setPrinterWidth').value;
+  document.querySelectorAll('[data-rate]').forEach(inp => { SETTINGS.rates[inp.dataset.rate] = parseFloat(inp.value) || 0; });
+  document.querySelectorAll('[data-area-name]').forEach(inp => { SETTINGS.areas[parseInt(inp.dataset.areaName,10)].name = inp.value.trim(); });
+  document.querySelectorAll('[data-area-cap]').forEach(inp => { SETTINGS.areas[parseInt(inp.dataset.areaCap,10)].capacity = parseInt(inp.value,10) || 0; });
+  saveSettings(SETTINGS);
+  document.getElementById('topbarParkingName').textContent = SETTINGS.parkingName;
+  toastSuccess('Settings saved.');
+  document.getElementById('settingsOverlay').style.display = 'none';
+  renderDashboard();
+});
+
+/* Backup / Restore */
+document.getElementById('btnBackup').addEventListener('click', async () => {
+  const data = { settings: SETTINGS, records: await db.records.toArray(), exportedAt: syncedNow() };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `parking-stand-backup-${dayjs(syncedNow()).format('YYYYMMDD-HHmmss')}.json`;
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  toastSuccess('Backup file downloaded.');
+  moreSheetEl.hide();
+});
+document.getElementById('restoreFileInput').addEventListener('change', function(e){
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = async function(ev){
+    try{
+      const data = JSON.parse(ev.target.result);
+      if(data.settings) SETTINGS = Object.assign(JSON.parse(JSON.stringify(DEFAULT_SETTINGS)), data.settings);
+      if(data.records) {
+        await db.records.clear();
+        await db.records.bulkPut(data.records);
+      }
+      saveSettings(SETTINGS);
+      document.getElementById('topbarParkingName').textContent = SETTINGS.parkingName;
+      toastSuccess('Backup restored successfully.');
+      moreSheetEl.hide();
+      renderDashboard();
+    }catch(err){ toastError('Invalid backup file.'); }
+  };
+  reader.readAsText(file);
+});
+</script>
+<script>
+/* ============================================================
+   4. DASHBOARD RENDERING
+============================================================ */
+function totalCapacity(){ return SETTINGS.areas.reduce((s,a) => s + (a.capacity||0), 0); }
+
+async function renderDashboard(){
+  const records = await db.records.toArray();
+  const todayStart = nowKarachi().startOf('day').valueOf();
+  const active = records.filter(r => r.status === 'active');
+  const todaysRecords = records.filter(r => r.entryTs >= todayStart);
+  const todaysExits = records.filter(r => r.exitTs && r.exitTs >= todayStart);
+  const todaysCollection = todaysExits.reduce((s,r) => s + (r.charge||0), 0);
+
+  document.getElementById('dsVehiclesToday').textContent = todaysRecords.length;
+  document.getElementById('dsVehiclesTodaySub').textContent = todaysRecords.length ? 'entries recorded' : 'no entries yet';
+  document.getElementById('dsActiveNow').textContent = active.length;
+  document.getElementById('dsCollection').textContent = 'Rs.' + todaysCollection.toLocaleString();
+  document.getElementById('dsCollectionSub').textContent = todaysExits.length + ' exits billed';
+  document.getElementById('dsExitsToday').textContent = todaysExits.length;
+
+  const cap = totalCapacity();
+  const occupied = active.length;
+  const available = Math.max(cap - occupied, 0);
+  const pct = cap > 0 ? Math.min(Math.round((occupied/cap)*100), 100) : 0;
+  document.getElementById('occupiedSlots').textContent = occupied;
+  document.getElementById('availableSlots').textContent = available;
+  document.getElementById('capacityPct').textContent = pct + '%';
+  const circumference = 226;
+  document.getElementById('capacityRing').setAttribute('stroke-dashoffset', circumference - (circumference*pct/100));
+
+  const vtypeWrap = document.getElementById('vtypeStats');
+  vtypeWrap.innerHTML = Object.keys(SETTINGS.rates).map(type => {
+    const count = active.filter(r => r.vehicleType === type).length;
+    return `<div class="vtype-pill"><i class="bi ${VEHICLE_ICONS[type]||'bi-truck'}"></i><div class="vt-count">${count}</div><div class="vt-name">${type}</div></div>`;
+  }).join('');
+
+  const recentWrap = document.getElementById('recentActivityList');
+  const recent = [...records].sort((a,b) => (b.exitTs||b.entryTs) - (a.exitTs||a.entryTs)).slice(0, 6);
+  recentWrap.innerHTML = recent.length ? recent.map(recordStubHTML).join('') : '<div class="empty-state"><i class="bi bi-inboxes"></i>No activity yet. Tap the + button to add your first entry.</div>';
+  bindStubClicks(recentWrap);
+}
+
+function recordStubHTML(r){
+  const isActive = r.status === 'active';
+  const t = dayjs(r.entryTs).tz(TZ);
+  const amt = isActive ? '--' : ('Rs.' + (r.charge||0).toLocaleString());
+  return `
+    <div class="stub" data-token="${r.token}">
+      <div class="stub-icon ${isActive?'':'exited'}"><i class="bi ${VEHICLE_ICONS[r.vehicleType]||'bi-truck'}"></i></div>
+      <div class="stub-divider"></div>
+      <div class="stub-body">
+        <div class="stub-title">${r.vehicleNumber || 'No Plate'} <span class="stub-token">#${r.token}</span></div>
+        <div class="stub-meta">${r.vehicleType} • ${t.format('DD MMM, hh:mm A')}${r.area?(' • '+r.area):''}</div>
+      </div>
+      <div class="stub-right">
+        <div class="stub-amt">${amt}</div>
+        <span class="status-chip ${isActive?'active':'exited'}">${isActive?'Active':'Exited'}</span>
+      </div>
+    </div>`;
+}
+function bindStubClicks(container){
+  container.querySelectorAll('[data-token]').forEach(el => el.addEventListener('click', () => showRecordDetailSheet(parseInt(el.dataset.token,10))));
+}
+
+async function showRecordDetailSheet(token){
+  const r = await db.records.get(token);
+  if(!r) return;
+  const isActive = r.status === 'active';
+  const t = dayjs(r.entryTs).tz(TZ);
+  document.getElementById('exitConfirmBody').innerHTML = `
+    <h6 class="font-display fw-bold mb-3">Token #${r.token}</h6>
+    ${r.photo ? `<img src="${r.photo}" style="width:100%;border-radius:16px;margin-bottom:12px; max-height:200px; object-fit:cover;">` : ''}
+    <div class="card p-3 mb-2">
+      <div class="d-flex justify-content-between mb-2"><span class="stat-label">Vehicle</span><b>${r.vehicleType} • ${r.vehicleNumber||'--'}</b></div>
+      <div class="d-flex justify-content-between mb-2"><span class="stat-label">Owner</span><b>${r.ownerName||'--'}</b></div>
+      <div class="d-flex justify-content-between mb-2"><span class="stat-label">Mobile</span><b>${r.mobile||'--'}</b></div>
+      <div class="d-flex justify-content-between mb-2"><span class="stat-label">Slot</span><b>${r.area||'--'} / ${r.slot||'--'}</b></div>
+      <div class="d-flex justify-content-between mb-2"><span class="stat-label">Entry</span><b>${t.format('DD MMM, hh:mm A')}</b></div>
+      <div class="d-flex justify-content-between"><span class="stat-label">Status</span><span class="status-chip ${isActive?'active':'exited'}">${isActive?'Active':'Exited'}</span></div>
+    </div>
+    <button class="btn btn-brand btn-block-tap ripple" id="btnReprintFromSheet">Reprint Receipt</button>
+  `;
+  document.getElementById('btnReprintFromSheet').onclick = () => printRecord(r, r.status === 'exited');
+  exitConfirmSheetEl.show();
+}
+</script>
+<script>
+/* ============================================================
+   5. FULLSCREEN CAMERA / QR SCANNER (shared overlay)
+============================================================ */
+let fsStream = null;
+let fsMode = null; // 'capture' | 'qr'
+let fsLoopId = null;
+let cocoModel = null;
+let cocoModelLoading = false;
+
+function cameraApiAvailable(){
+  return !!(window.isSecureContext && navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+}
+
+async function openFsCamera(mode){
+  if(!cameraApiAvailable()){
+    Swal.fire({
+      icon:'warning',
+      title:'Camera Unavailable',
+      html:'Mobile browsers only allow camera access on <b>HTTPS</b> or <b>localhost</b>.<br><br>Agar aap ne yeh file seedha (file://) khol rakhi hai to camera kaam nahi karega — is file ko kisi local web server ya HTTPS host se open karein.',
+      confirmButtonColor:'#161A22'
+    });
+    return;
+  }
+  fsMode = mode;
+  const overlay = document.getElementById('fsCamera');
+  const guideBox = document.getElementById('fsGuideBox');
+  const scanLine = document.getElementById('fsScanLine');
+  const footer = document.getElementById('fsFooter');
+  const hint = document.getElementById('fsHint');
+  const title = document.getElementById('fsCameraTitle');
+
+  guideBox.classList.toggle('qr', mode === 'qr');
+  scanLine.style.display = mode === 'qr' ? 'block' : 'none';
+  footer.style.display = mode === 'capture' ? 'flex' : 'none';
+  title.textContent = mode === 'capture' ? 'Capture Vehicle' : 'Scan Token QR Code';
+  hint.textContent = mode === 'capture' ? 'Center the vehicle & number plate in frame, then tap the shutter.' : 'Point the camera at the token QR code — it scans automatically.';
+
+  overlay.classList.add('active');
+  try{
+    fsStream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:'environment', width:{ideal:1280}, height:{ideal:960} } });
+    const video = document.getElementById('fsVideo');
+    video.srcObject = fsStream;
+    await video.play();
+    if(mode === 'qr') startQrLoop();
+  }catch(err){
+    toastError('Camera access denied or unavailable.');
+    closeFsCamera();
+  }
+}
+
+function closeFsCamera(){
+  if(fsLoopId) cancelAnimationFrame(fsLoopId);
+  fsLoopId = null;
+  if(fsStream){ fsStream.getTracks().forEach(t => t.stop()); fsStream = null; }
+  document.getElementById('fsCamera').classList.remove('active');
+  fsMode = null;
+}
+document.getElementById('btnCloseFsCamera').addEventListener('click', closeFsCamera);
+
+function startQrLoop(){
+  const video = document.getElementById('fsVideo');
+  const canvas = document.getElementById('fsCanvas');
+  const ctx = canvas.getContext('2d');
+  function tick(){
+    if(!fsStream || fsMode !== 'qr') return;
+    if(video.readyState === video.HAVE_ENOUGH_DATA){
+      canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const code = jsQR(imgData.data, imgData.width, imgData.height);
+      if(code){ handleQrResult(code.data); closeFsCamera(); return; }
+    }
+    fsLoopId = requestAnimationFrame(tick);
+  }
+  tick();
+}
+
+/* Compress an image drawn on a canvas down to a small storage-friendly JPEG */
+function compressCanvas(canvas, maxWidth, quality){
+  let w = canvas.width, h = canvas.height;
+  if(w > maxWidth){ h = Math.round(h * maxWidth / w); w = maxWidth; }
+  const c2 = document.createElement('canvas');
+  c2.width = w; c2.height = h;
+  c2.getContext('2d').drawImage(canvas, 0, 0, w, h);
+  return c2.toDataURL('image/jpeg', quality);
+}
+
+/* Convert a stored (color) photo into a grayscale, contrast-boosted version
+   for crisp results on black & white thermal printers. Async via Image load. */
+function grayscalePrintImage(dataUrl, cb){
+  const img = new Image();
+  img.onload = function(){
+    const c = document.createElement('canvas');
+    c.width = img.width; c.height = img.height;
+    const ctx = c.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    const id = ctx.getImageData(0, 0, c.width, c.height);
+    const d = id.data;
+    for(let i = 0; i < d.length; i += 4){
+      let gray = 0.299*d[i] + 0.587*d[i+1] + 0.114*d[i+2];
+      gray = (gray - 128) * 1.35 + 128; // contrast boost for thermal clarity
+      gray = Math.max(0, Math.min(255, gray));
+      d[i] = d[i+1] = d[i+2] = gray;
+    }
+    ctx.putImageData(id, 0, 0);
+    cb(c.toDataURL('image/jpeg', 0.7));
+  };
+  img.onerror = function(){ cb(null); };
+  img.src = dataUrl;
+}
+
+/* Shared lazy-loader: injects a <script src> once and resolves when ready.
+   Keeps heavy optional libraries (OCR, ML detection) out of the initial
+   page load entirely — they're only fetched the first time they're used. */
+const __loadedScripts = {};
+function loadScriptOnce(src){
+  if(__loadedScripts[src]) return __loadedScripts[src];
+  __loadedScripts[src] = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src; s.async = true;
+    s.onload = () => resolve();
+    s.onerror = () => { delete __loadedScripts[src]; reject(new Error('Failed to load ' + src)); };
+    document.head.appendChild(s);
+  });
+  return __loadedScripts[src];
+}
+
+/* Best-effort on-device vehicle-type detection (COCO-SSD via TensorFlow.js).
+   Both libraries are fetched only the first time a photo is captured, so the
+   app still starts instantly (even offline); if the model/network is
+   unavailable this silently no-ops and the operator just picks the type
+   manually. */
+async function ensureCocoModel(){
+  if(cocoModel || cocoModelLoading) return cocoModel;
+  cocoModelLoading = true;
+  try{
+    await loadScriptOnce('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js');
+    await loadScriptOnce('https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js');
+    cocoModel = await cocoSsd.load({ base:'lite_mobilenet_v2' });
+  }catch(e){ cocoModel = null; }
+  cocoModelLoading = false;
+  return cocoModel;
+}
+const COCO_TO_VEHICLE = { motorcycle:'Bike', bicycle:'Bike', car:'Car', bus:'Bus', truck:'Truck' };
+
+async function autoDetectVehicleType(canvas){
+  try{
+    const model = await ensureCocoModel();
+    if(!model) return null;
+    const preds = await model.detect(canvas);
+    const hit = preds.filter(p => COCO_TO_VEHICLE[p.class]).sort((a,b) => b.score - a.score)[0];
+    return hit ? { type: COCO_TO_VEHICLE[hit.class], confidence: hit.score } : null;
+  }catch(e){ return null; }
+}
+</script>
+<script>
+/* ============================================================
+   6. NEW ENTRY SCREEN
+============================================================ */
+let selectedVehicleType = null;
+let capturedPhotoDataUrl = null;
+let frozenEntryTs = null;
+
+function prepareNewEntryScreen(){
+  const grid = document.getElementById('vtypeChipGrid');
+  grid.innerHTML = Object.keys(SETTINGS.rates).map(type => `
+    <div class="vtype-chip ripple" data-vtype="${type}">
+      <i class="bi ${VEHICLE_ICONS[type]||'bi-truck'}"></i><span>${type}</span>
+    </div>`).join('');
+  grid.querySelectorAll('.vtype-chip').forEach(chip => chip.addEventListener('click', () => selectVehicleTypeChip(chip.dataset.vtype)));
+  if(!selectedVehicleType || !SETTINGS.rates.hasOwnProperty(selectedVehicleType)) selectedVehicleType = Object.keys(SETTINGS.rates)[0];
+  selectVehicleTypeChip(selectedVehicleType);
+
+  const areaSelect = document.getElementById('entryArea');
+  areaSelect.innerHTML = SETTINGS.areas.map(a => `<option value="${a.name}">${a.name}</option>`).join('');
+
+  // Freeze the entry time now — the same value is shown here AND saved/printed
+  // on submit, so the receipt can never show a different time than the form.
+  frozenEntryTs = syncedNow();
+  document.getElementById('entryTimeDisplay').value = dayjs(frozenEntryTs).tz(TZ).format('DD MMM YYYY, hh:mm A');
+  document.getElementById('entryVehicleNumber').value = '';
+  document.getElementById('entryOwnerName').value = '';
+  document.getElementById('entryMobile').value = '';
+  document.getElementById('entrySlot').value = '';
+  document.getElementById('entryNotes').value = '';
+  document.getElementById('ocrStatusLine').innerHTML = '';
+  capturedPhotoDataUrl = null;
+  resetCaptureBox();
+}
+function selectVehicleTypeChip(type){
+  selectedVehicleType = type;
+  document.querySelectorAll('#vtypeChipGrid .vtype-chip').forEach(c => c.classList.toggle('selected', c.dataset.vtype === type));
+}
+
+function resetCaptureBox(){
+  document.getElementById('captureBox').innerHTML = `
+    <i class="bi bi-camera-fill" style="font-size:1.8rem; color:var(--ink-400);"></i>
+    <div class="cap-hint">Tap "Capture Image" below to open the camera and auto-read the number plate</div>`;
+}
+
+document.getElementById('btnOpenCamera').addEventListener('click', () => openFsCamera('capture'));
+document.getElementById('captureBox').addEventListener('click', () => openFsCamera('capture'));
+
+function preprocessForOCR(canvas) {
+  const ctx = canvas.getContext('2d');
+  const id = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const d = id.data;
+  
+  for (let i = 0; i < d.length; i += 4) {
+    let v = (0.2126 * d[i] + 0.7152 * d[i+1] + 0.0722 * d[i+2] >= 128) ? 255 : 0;
+    d[i] = d[i+1] = d[i+2] = v;
+  }
+  ctx.putImageData(id, 0, 0);
+}
+
+document.getElementById('btnFsShutter').addEventListener('click', async () => {
+  if(fsMode !== 'capture') return;
+  const video = document.getElementById('fsVideo');
+  const canvas = document.getElementById('fsCanvas');
+
+  const vRect = video.getBoundingClientRect();
+  const gRect = document.getElementById('fsGuideBox').getBoundingClientRect();
+  const scaleMax = Math.max(vRect.width / (video.videoWidth || 1280), vRect.height / (video.videoHeight || 960));
+  const actualVidW = (video.videoWidth || 1280) * scaleMax;
+  const actualVidH = (video.videoHeight || 960) * scaleMax;
+  const vidOffsetX = (actualVidW - vRect.width) / 2;
+  const vidOffsetY = (actualVidH - vRect.height) / 2;
+  
+  const sourceX = (gRect.left - vRect.left + vidOffsetX) / scaleMax;
+  const sourceY = (gRect.top - vRect.top + vidOffsetY) / scaleMax;
+  const sourceWidth = gRect.width / scaleMax;
+  const sourceHeight = gRect.height / scaleMax;
+
+  canvas.width = sourceWidth;
+  canvas.height = sourceHeight;
+  canvas.getContext('2d').drawImage(video, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, sourceWidth, sourceHeight);
+
+  // Compressed copy for on-screen preview & localStorage (keeps storage small)
+  capturedPhotoDataUrl = compressCanvas(canvas, 480, 0.55);
+  document.getElementById('captureBox').innerHTML = `<img src="${capturedPhotoDataUrl}"><button class="capture-remove" id="btnRemovePhoto" type="button"><i class="bi bi-x-lg"></i></button><span class="detect-badge" id="detectBadge" style="display:none;"><i class="bi bi-cpu"></i><span id="detectBadgeText"></span></span>`;
+  document.getElementById('btnRemovePhoto').onclick = (e) => { e.stopPropagation(); capturedPhotoDataUrl = null; resetCaptureBox(); };
+
+  closeFsCamera();
+
+  // Full-resolution canvas is used (not the compressed copy) for best OCR & detection accuracy
+  preprocessForOCR(canvas);
+  runPlateOCR(canvas);
+  autoDetectVehicleType(canvas).then(result => {
+    if(!result) return;
+    const badge = document.getElementById('detectBadge');
+    const badgeText = document.getElementById('detectBadgeText');
+    if(badge && SETTINGS.rates.hasOwnProperty(result.type)){
+      selectVehicleTypeChip(result.type);
+      badgeText.textContent = `Detected: ${result.type}`;
+      badge.style.display = 'flex';
+      toastSuccess(`Auto-detected vehicle type: ${result.type} (verify & change if needed)`);
+    }
+  });
+});
+
+async function runPlateOCR(canvas){
+  const statusLine = document.getElementById('ocrStatusLine');
+  statusLine.innerHTML = '<span class="loader-dots" style="display:inline-flex; padding:0; gap:3px; vertical-align:middle;"><span></span><span></span><span></span></span> Reading number plate...';
+  try{
+    await loadScriptOnce('https://cdn.jsdelivr.net/npm/tesseract.js@5.1.0/dist/tesseract.min.js');
+    // Digits-only whitelist: plates like "BAV 2024" should only auto-fill the
+    // numeric part ("2024") — letters are ignored entirely. This is also
+    // noticeably faster than full alphanumeric recognition.
+    const { data } = await Tesseract.recognize(canvas, 'eng', {
+      tessedit_char_whitelist: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ ',
+      tessedit_pageseg_mode: '7' // treat the plate as a single line of text
+    });
+    let cleanText = (data.text || '').toUpperCase().replace(/[^A-Z0-9 ]/g, '').trim();
+    if(cleanText.length >= 3){
+      document.getElementById('entryVehicleNumber').value = cleanText;
+      statusLine.innerHTML = '<i class="bi bi-check-circle-fill" style="color:var(--go-500);"></i> Number auto-filled — please verify.';
+    } else {
+      statusLine.innerHTML = '<i class="bi bi-info-circle-fill" style="color:var(--ink-400);"></i> Could not confidently read the number. Enter it manually.';
+    }
+  }catch(err){
+    statusLine.innerHTML = '<i class="bi bi-exclamation-triangle-fill" style="color:var(--stop-500);"></i> OCR failed. Enter the vehicle number manually.';
+  }
+}
+
+document.getElementById('btnSavePrintEntry').addEventListener('click', async () => {
+  const vehicleNumber = document.getElementById('entryVehicleNumber').value.trim().toUpperCase();
+  const ownerName = document.getElementById('entryOwnerName').value.trim();
+  const mobile = document.getElementById('entryMobile').value.trim();
+  const area = document.getElementById('entryArea').value;
+  const slot = document.getElementById('entrySlot').value.trim();
+  const notes = document.getElementById('entryNotes').value.trim();
+
+  if(!selectedVehicleType){ toastWarn('Please select a vehicle type.'); return; }
+
+  const allRecords = await db.records.toArray();
+  const activeInArea = allRecords.filter(r => r.status === 'active' && r.area === area).length;
+  const areaObj = SETTINGS.areas.find(a => a.name === area);
+  if(areaObj && activeInArea >= areaObj.capacity){ toastWarn(`${area} is at full capacity.`); return; }
+
+  const token = nextTokenNo();
+  const record = {
+    token, vehicleType:selectedVehicleType, vehicleNumber, ownerName, mobile, area, slot, notes,
+    photo: capturedPhotoDataUrl, entryTs: frozenEntryTs || syncedNow(), exitTs:null, charge:0, status:'active', paid:false,
+    rateAtEntry: SETTINGS.rates[selectedVehicleType] || 0
+  };
+  await db.records.put(record);
+
+
+  printRecord(record, false);
+  toastSuccess(`Token #${token} created & sent to printer.`);
+  goto('dashboard');
+});
+</script>
+<script>
+/* ============================================================
+   7. PRINTING — minimum-paper receipt (QR left / details right),
+      single date-time row, empty fields hidden, grayscale photo
+============================================================ */
+function computeDuration(entryTs, exitTs){
+  const mins = Math.max(Math.round((exitTs - entryTs)/60000), 0);
+  const h = Math.floor(mins/60), m = mins%60;
+  return { mins, label: `${h}h ${m}m` };
+}
+function computeCharge(record, exitTs){
+  const dur = computeDuration(record.entryTs, exitTs);
+  const hours = Math.max(Math.ceil(dur.mins/60), 1);
+  return hours * (record.rateAtEntry || SETTINGS.rates[record.vehicleType] || 0);
+}
+
+function toggleLine(id, valueId, value){
+  const row = document.getElementById(id);
+  if(value){ document.getElementById(valueId).textContent = value; row.style.display = 'flex'; }
+  else { row.style.display = 'none'; }
+}
+
+function fillReceipt(record, opts){
+  opts = opts || {};
+  const area = document.getElementById('tokenPrintArea');
+  area.className = SETTINGS.printerWidth === '80' ? 'w80' : '';
+
+  document.getElementById('rcParkingName').textContent = SETTINGS.parkingName;
+  document.getElementById('rcAddress').textContent = SETTINGS.address || '';
+  const logoEl = document.getElementById('rcLogo');
+  if(SETTINGS.logo){ logoEl.src = SETTINGS.logo; logoEl.style.display = 'block'; } else { logoEl.style.display = 'none'; }
+
+  const entryT = dayjs(record.entryTs).tz(TZ);
+  document.getElementById('rcDateTime').textContent = entryT.format('DD-MMM-YYYY, hh:mm A');
+  document.getElementById('rcToken').textContent = '#' + String(record.token).padStart(4,'0');
+
+  const photoEl = document.getElementById('rcPhoto');
+  const photoSrc = opts.photoOverride || null;
+  if(photoSrc){ photoEl.src = photoSrc; photoEl.style.display = 'block'; } else { photoEl.style.display = 'none'; }
+
+  document.getElementById('rcVehicleType').textContent = record.vehicleType;
+  toggleLine('rcLineVehicleNo', 'rcVehicleNo', record.vehicleNumber || '');
+  const slotVal = (record.area || record.slot) ? [record.area, record.slot].filter(Boolean).join(' / ') : '';
+  toggleLine('rcLineSlot', 'rcSlot', slotVal);
+  toggleLine('rcLineOwner', 'rcOwner', record.ownerName || '');
+  toggleLine('rcLineMobile', 'rcMobile', record.mobile || '');
+
+  if(opts.isExit){
+    toggleLine('rcLineDuration', 'rcDuration', computeDuration(record.entryTs, record.exitTs).label);
+    document.getElementById('rcAmount').textContent = 'Rs.' + (record.charge||0).toLocaleString();
+  } else {
+    document.getElementById('rcLineDuration').style.display = 'none';
+    document.getElementById('rcAmount').textContent = 'Entry Token';
+  }
+
+  document.getElementById('rcOperator').textContent = 'Operator: ' + (SETTINGS.operator || '--');
+  const urduEl = document.getElementById('rcCustomUrdu');
+  if(SETTINGS.urduFooter && SETTINGS.urduFooter.trim()){ urduEl.textContent = SETTINGS.urduFooter.trim(); urduEl.style.display = 'block'; }
+  else { urduEl.textContent = ''; urduEl.style.display = 'none'; }
+
+  const qrData = JSON.stringify({ token:record.token, vehicleNumber:record.vehicleNumber, entryTs:record.entryTs, vehicleType:record.vehicleType, slot:record.slot });
+  const qrWrap = document.getElementById('rcQr');
+  qrWrap.innerHTML = '';
+  if(window.QRCode){ new QRCode(qrWrap, { text:qrData, width:78, height:78, correctLevel:QRCode.CorrectLevel.M }); }
+}
+
+function hidePrintContainer(){ document.getElementById('printContainer').style.display = 'none'; }
+function firePrint(){
+  const container = document.getElementById('printContainer');
+  container.style.display = 'flex';
+  window.requestAnimationFrame(() => window.requestAnimationFrame(() => window.print()));
+  // Safety net: some mobile browsers/WebViews never fire 'afterprint' after a
+  // native print/share sheet — this guarantees the overlay never gets stuck.
+  clearTimeout(window.__printHideTimer);
+  window.__printHideTimer = setTimeout(hidePrintContainer, 4000);
+}
+window.addEventListener('afterprint', hidePrintContainer);
+
+/* Entry point used everywhere in the app to print a token/exit receipt.
+   Waits for the vehicle photo to be converted to a crisp grayscale
+   version (better on black & white thermal paper) before printing. */
+function printRecord(record, isExit){
+  if(record.photo){
+    grayscalePrintImage(record.photo, function(gs){
+      fillReceipt(record, { isExit: !!isExit, photoOverride: gs });
+      firePrint();
+    });
+  } else {
+    fillReceipt(record, { isExit: !!isExit });
+    firePrint();
+  }
+}
+</script>
+<script>
+/* ============================================================
+   8. EXIT MODULE — fullscreen QR scan + combined manual search
+============================================================ */
+let exitMode = 'qr';
+
+function prepareExitScreen(){
+  document.getElementById('exitResultWrap').innerHTML = '';
+  document.getElementById('exitSearchInput').value = '';
+}
+document.querySelectorAll('[data-exitmode]').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('[data-exitmode]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  exitMode = btn.dataset.exitmode;
+  document.getElementById('exitResultWrap').innerHTML = '';
+  document.getElementById('exitModeQr').style.display = exitMode === 'qr' ? 'block' : 'none';
+  document.getElementById('exitModeManual').style.display = exitMode === 'manual' ? 'block' : 'none';
+}));
+
+document.getElementById('btnStartScan').addEventListener('click', () => openFsCamera('qr'));
+
+function handleQrResult(dataStr){
+  let token = null;
+  try{ const parsed = JSON.parse(dataStr); token = parsed.token; }catch(e){ token = parseInt(dataStr, 10); }
+  if(token == null || isNaN(token)){ toastError('Unrecognized QR code.'); return; }
+  goto('exit');
+  lookupAndShowExit({ token });
+}
+
+document.getElementById('btnExitSearch').addEventListener('click', () => {
+  const val = document.getElementById('exitSearchInput').value.trim();
+  if(!val){ toastWarn('Please enter a token, vehicle number or mobile number.'); return; }
+  lookupAndShowExit({ smart: val });
+});
+document.getElementById('exitSearchInput').addEventListener('keydown', (e) => { if(e.key === 'Enter') document.getElementById('btnExitSearch').click(); });
+
+async function lookupAndShowExit(query){
+  const records = await db.records.toArray();
+  let match = null;
+  if(query.token != null){
+    match = records.find(r => r.token === query.token && r.status === 'active');
+  } else if(query.smart){
+    const val = query.smart;
+    const valUpper = val.toUpperCase();
+    match = records.find(r => r.status === 'active' && (
+      String(r.token) === val ||
+      (r.vehicleNumber||'').toUpperCase() === valUpper ||
+      (r.mobile||'') === val
+    ));
+    if(!match){
+      match = records.find(r => r.status === 'active' && (
+        (r.vehicleNumber||'').toUpperCase().includes(valUpper) ||
+        (r.mobile||'').includes(val)
+      ));
+    }
+  }
+
+  const wrap = document.getElementById('exitResultWrap');
+  if(!match){
+    wrap.innerHTML = '<div class="empty-state"><i class="bi bi-emoji-frown"></i>No active parking record found for that search.</div>';
+    return;
+  }
+  const exitTs = syncedNow();
+  const dur = computeDuration(match.entryTs, exitTs);
+  const charge = computeCharge(match, exitTs);
+  const entryT = dayjs(match.entryTs).tz(TZ);
+
+  wrap.innerHTML = `
+    <div class="section-label">Vehicle Found</div>
+    <div class="card p-3">
+      ${match.photo ? `<img src="${match.photo}" style="width:100%; border-radius:14px; margin-bottom:12px; max-height:180px; object-fit:cover;">` : ''}
+      <div class="d-flex justify-content-between mb-2"><span class="stat-label">Token</span><b>#${match.token}</b></div>
+      <div class="d-flex justify-content-between mb-2"><span class="stat-label">Vehicle</span><b>${match.vehicleType} • ${match.vehicleNumber||'--'}</b></div>
+      <div class="d-flex justify-content-between mb-2"><span class="stat-label">Slot</span><b>${match.area||'--'} / ${match.slot||'--'}</b></div>
+      <div class="d-flex justify-content-between mb-2"><span class="stat-label">Entry Time</span><b>${entryT.format('DD MMM, hh:mm A')}</b></div>
+      <div class="d-flex justify-content-between mb-2"><span class="stat-label">Parking Duration</span><b>${dur.label}</b></div>
+      <div class="t-rule" style="border-color:var(--border-soft);"></div>
+      <div class="d-flex justify-content-between align-items-center mt-2">
+        <span class="stat-label">Charges</span>
+        <span class="stat-value" style="font-size:1.5rem;">Rs.${charge.toLocaleString()}</span>
+      </div>
+    </div>
+    <button class="btn btn-amber btn-block-tap ripple mt-3" id="btnConfirmExit"><i class="bi bi-box-arrow-right me-1"></i> Confirm Exit &amp; Print Receipt</button>
+  `;
+  document.getElementById('btnConfirmExit').onclick = () => confirmExit(match.token, exitTs, charge);
+}
+
+async function confirmExit(token, exitTs, charge){
+  const r = await db.records.get(token);
+  if(!r) return;
+  r.exitTs = exitTs;
+  r.charge = charge;
+  r.status = 'exited';
+  r.paid = true;
+  await db.records.put(r);
+  printRecord(r, true);
+  toastSuccess(`Vehicle exited. Rs.${charge.toLocaleString()} collected.`);
+  document.getElementById('exitResultWrap').innerHTML = '';
+  document.getElementById('exitSearchInput').value = '';
+  goto('dashboard');
+}
+</script>
+<script>
+/* ============================================================
+   9. HISTORY SCREEN — filters + search
+============================================================ */
+let historyRange = 'today';
+let historyStatus = 'all';
+
+document.querySelectorAll('#historyDateChips [data-range]').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('#historyDateChips [data-range]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); historyRange = btn.dataset.range; renderHistoryScreen();
+}));
+document.querySelectorAll('#historyStatusChips [data-status]').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('#historyStatusChips [data-status]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); historyStatus = btn.dataset.status; renderHistoryScreen();
+}));
+document.getElementById('historySearchInput').addEventListener('input', renderHistoryScreen);
+
+function rangeStart(range){
+  const now = nowKarachi();
+  if(range === 'today') return now.startOf('day').valueOf();
+  if(range === 'yesterday') return now.subtract(1,'day').startOf('day').valueOf();
+  if(range === 'week') return now.startOf('week').valueOf();
+  return 0;
+}
+function rangeEnd(range){
+  const now = nowKarachi();
+  if(range === 'yesterday') return now.startOf('day').valueOf();
+  return syncedNow() + 1;
+}
+
+async function renderHistoryScreen(){
+  let list = await db.records.toArray();
+  const start = rangeStart(historyRange), end = rangeEnd(historyRange);
+  list = list.filter(r => r.entryTs >= start && r.entryTs < end);
+
+  if(historyStatus === 'active') list = list.filter(r => r.status === 'active');
+  else if(historyStatus === 'exited') list = list.filter(r => r.status === 'exited');
+  else if(historyStatus === 'paid') list = list.filter(r => r.paid);
+  else if(historyStatus === 'unpaid') list = list.filter(r => r.status === 'exited' && !r.paid);
+
+  const q = document.getElementById('historySearchInput').value.trim().toLowerCase();
+  if(q){
+    list = list.filter(r => String(r.token).includes(q) || (r.vehicleNumber||'').toLowerCase().includes(q) ||
+      (r.mobile||'').toLowerCase().includes(q) || (r.ownerName||'').toLowerCase().includes(q));
+  }
+  list.sort((a,b) => (b.exitTs||b.entryTs) - (a.exitTs||a.entryTs));
+
+  const wrap = document.getElementById('historyList');
+  wrap.innerHTML = list.length ? list.map(recordStubHTML).join('') : '<div class="empty-state"><i class="bi bi-inboxes"></i>No records match these filters.</div>';
+  bindStubClicks(wrap);
+}
+
+/* ============================================================
+   10. APP INITIALIZATION
+============================================================ */
+async function init(){
+  // Unlock immediately using the device clock so the app is never stuck on a
+  // blank/locked screen waiting for the network; refine with real internet
+  // time in the background (and re-check license once it resolves).
+  checkLicenseStatus();
+  await migrateLocalStorageToDexie();
+  syncInternetTime().then(checkLicenseStatus);
+
+  document.getElementById('activateBtn').addEventListener('click', handleActivation);
+
+  moreSheetEl = new bootstrap.Offcanvas(document.getElementById('moreSheet'));
+  searchSheetEl = new bootstrap.Offcanvas(document.getElementById('searchSheet'));
+  exitConfirmSheetEl = new bootstrap.Offcanvas(document.getElementById('exitConfirmSheet'));
+
+  document.getElementById('topbarParkingName').textContent = SETTINGS.parkingName;
+
+  renderDashboard();
+  tickClock();
+  setInterval(tickClock, 1000);
+  setInterval(() => { if(document.getElementById('screen-dashboard').classList.contains('active')) renderDashboard(); }, 30000);
+  setInterval(checkLicenseStatus, 1000);
+  setInterval(syncInternetTime, 15 * 60 * 1000); // re-sync every 15 min to stay accurate & tamper-resistant
+
+  // Stop any open camera stream if the tab/app is backgrounded or closed —
+  // prevents the camera light/resource staying active in the background.
+  document.addEventListener('visibilitychange', () => { if(document.hidden) closeFsCamera(); });
+  window.addEventListener('pagehide', closeFsCamera);
+}
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
