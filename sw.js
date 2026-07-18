@@ -1,5 +1,7 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.5.4/workbox-sw.js');
 
+const SW_VERSION = '1.0.1'; // Update this string to force SW re-installation
+
 if (workbox) {
   // Force activate the new service worker immediately
   workbox.core.skipWaiting();
@@ -23,10 +25,13 @@ if (workbox) {
   );
 
   // Cache same-origin assets (e.g. index.html)
+  // Using NetworkFirst so users always get the latest uploaded code from GitHub when online.
+  // Falls back to cache instantly if they are offline.
   workbox.routing.registerRoute(
     ({url}) => url.origin === self.location.origin,
-    new workbox.strategies.StaleWhileRevalidate({
+    new workbox.strategies.NetworkFirst({
       cacheName: 'parking-stand-local',
+      networkTimeoutSeconds: 3,
     })
   );
 
